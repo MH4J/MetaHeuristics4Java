@@ -1,19 +1,33 @@
 package de.mh4j.solver.simulatedAnnealing;
 
 import de.mh4j.solver.Solution;
-import de.mh4j.solver.Solver;
+import de.mh4j.solver.AbstractSolver;
 
-public abstract class LocalSearchSolver<GenericSolutionType extends Solution> extends Solver<GenericSolutionType> {
+public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solution> extends AbstractSolver<GenericSolutionType> {
 			
 	protected int situationHasNotImproved = 0;		
 	
+	/**
+	 * TODO add javadoc
+	 */
+	public AbstractLocalSearchSolver() {
+		this(System.currentTimeMillis());
+	}
+	
+	/**
+	 * TODO add javadoc
+	 */
+	public AbstractLocalSearchSolver(long seed) {
+		super(seed);
+	}
+	
 	@Override
-	public void doInitialize() {
+	protected void doInitialize() {
 		situationHasNotImproved = 0;
 	}
 
 	@Override
-	public void doStep() {
+	protected void doStep() {
 		GenericSolutionType neighbor = createRandomNeighbor();		
 		
 		if (neighbor.isBetterThan(currentSolution)) {

@@ -7,7 +7,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class Solver<GenericSolutionType> implements Runnable {
+public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
 	protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
 	
 	protected final Random randomizer;
@@ -22,14 +22,14 @@ public abstract class Solver<GenericSolutionType> implements Runnable {
 	/**
 	 * TODO add javadoc
 	 */
-	public Solver() {
+	public AbstractSolver() {
 		this(System.currentTimeMillis());
 	}
 	
 	/**
 	 * TODO add javadoc
 	 */
-	public Solver(long seed) {
+	public AbstractSolver(long seed) {
 		this.randomizer = new Random(seed);
 		this.seed = seed;
 	}
@@ -100,8 +100,7 @@ public abstract class Solver<GenericSolutionType> implements Runnable {
 	 */
 	public abstract boolean hasFinished();
 	
-	/**
-	 * TODO add javadoc
-	 */
-	public abstract GenericSolutionType getCurrentSolution();	
+	public GenericSolutionType getCurrentSolution() {
+		return currentSolution;
+	}	
 }
