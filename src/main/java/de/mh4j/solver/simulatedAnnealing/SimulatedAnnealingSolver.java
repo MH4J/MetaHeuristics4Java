@@ -30,6 +30,6 @@ public class SimulatedAnnealingSolver<GenericSolutionType extends Solution> exte
 	@Override
 	public boolean hasFinished() {		
 		return situationHasNotImproved >= numberOfConsecutiveSteadyStepsUntilTermination;
-	}
+	}	
 
 }

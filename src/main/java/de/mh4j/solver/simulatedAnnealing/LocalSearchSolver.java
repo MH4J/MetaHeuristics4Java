@@ -1,9 +1,9 @@
 package de.mh4j.solver.simulatedAnnealing;
 
 import de.mh4j.solver.Solution;
-import de.mh4j.solver.Solver;
+import de.mh4j.solver.AbstractSolver;
 
-public abstract class LocalSearchSolver<GenericSolutionType extends Solution> extends Solver<GenericSolutionType> {
+public abstract class LocalSearchSolver<GenericSolutionType extends Solution> extends AbstractSolver<GenericSolutionType> {
 			
 	protected int situationHasNotImproved = 0;		
 	
