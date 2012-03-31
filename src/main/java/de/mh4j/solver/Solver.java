@@ -8,16 +8,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO write javadoc
+ * A Solver is the representation of an algorithm that can find or approximate
+ * solutions to a given optimization problem.
  * 
- * @param <GenericSolutionType>
+ *  TODO write more about the possible implementation and utilization of a solver
+ * 
+ * @param <GenericSolutionType> the actual Type of the solution class. 
  */
 public abstract class Solver<GenericSolutionType> implements Runnable {
 	protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
 	
 	protected final Random randomizer;
-	protected long seed;
-	
+	protected long seed;	
 	
 	private List<SolverStateListener> stateListeners = new ArrayList<SolverStateListener>(2);
 	protected GenericSolutionType currentSolution = null;
@@ -61,14 +63,13 @@ public abstract class Solver<GenericSolutionType> implements Runnable {
 	 * Performs a single step in the algorithm of this solver.
 	 * The following actions will be taken:
 	 * <ol>
-	 * <li>The solver will be initialized if it has not yet
+	 * <li>The solver will be {@link #initialize() initialized} if it has not yet
 	 * been initialized by a previous call to this method</li>
 	 * <li>The actual algorithm step will be performed</li>
 	 * <li>The step counter will be advanced by 1</li>
 	 * <li>All {@link SolverStateListener SolverStateListeners}
 	 * will be notified by a call to {@link SolverStateListener#solverStateHasChanged()}</li>
 	 * 
-	 * @see #initialize()
 	 * @see Solver#doStep()
 	 */
 	public void step() {
@@ -119,22 +120,27 @@ public abstract class Solver<GenericSolutionType> implements Runnable {
 	}
 	
 	/**
-	 * TODO add javadoc
+	 * Initializes this solver. Every call to this method must reset the solver in its initial state.
 	 */
 	protected abstract void doInitialize();
 	
 	/**
-	 * TODO add javadoc
+	 * Performs a single step of the solvers concrete algorithm.
 	 */
 	protected abstract void doStep();
 	
 	/**
-	 * TODO add javadoc
+	 * Returns <code>true</code> as soon as the solver has finished optimizing the problem.
+	 * Otherwise <code>false</code> is returned.
 	 */
 	public abstract boolean hasFinished();
 	
 	/**
-	 * TODO add javadoc
+	 * Returns the current solution that has been created after the last call to {@link #step()}.<br>
+	 * <br>
+	 * <b>Note:</b><br>
+	 * This interim solution may not be the best solution ever found and can even be <code>null</code>
+	 * if {@link #step()} has never been called. 
 	 */
 	public abstract GenericSolutionType getCurrentSolution();	
 }
