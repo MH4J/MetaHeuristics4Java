@@ -4,7 +4,7 @@ public interface SolverStateListener {
 
     void solverHasBeenRestarted();
 
-    void solverStateHasChanged();
+    void solverHasStepped();
 
     void solverHasFinished();
 

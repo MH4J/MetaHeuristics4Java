@@ -86,7 +86,7 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
         }
         doStep();
         numberOfSteps++;
-        notifyStateChanged();
+        notifyStepped();
     }
 
     private void initialize() {
@@ -95,9 +95,9 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
         doInitialize();
     }
 
-    private void notifyStateChanged() {
+    private void notifyStepped() {
         for (SolverStateListener listener : stateListeners) {
-            listener.solverStateHasChanged();
+            listener.solverHasStepped();
         }
     }
 
