@@ -35,8 +35,9 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
     }
 
     /**
-     * Creates a new solver with the given seed for the according {@link Random}
-     * .
+     * Creates a new solver with the given seed for the randomizer. This is
+     * useful if you want to recreate results that have been produced earlier
+     * with a specific seed.
      */
     public AbstractSolver(long seed) {
         this.randomizer = new Random(seed);

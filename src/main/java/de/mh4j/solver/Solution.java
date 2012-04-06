@@ -10,8 +10,7 @@ public interface Solution {
      * 
      * @return <code>true</code> if this solution instance is better than the
      *         other solution<br>
-     *         <code>false</code> if this solution is worse than the other or
-     *         both solutions are of the same quality.
+     *         <code>false</code> if this solution is of worse or equal quality.
      **/
     boolean isBetterThan(Solution otherSolution);
 
