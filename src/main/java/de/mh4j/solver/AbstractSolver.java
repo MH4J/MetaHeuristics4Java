@@ -23,7 +23,6 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
     protected long seed;
 
     private final List<SolverStateListener> stateListeners = new ArrayList<SolverStateListener>(2);
-    protected GenericSolutionType currentSolution = null;
     private int numberOfSteps = 0;
     private boolean isInitialized = false;
 
@@ -105,9 +104,10 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
      * Resets this solver. The current solution will be discarded and the solver
      * will be initialized again. All {@link SolverStateListener
      * SolverStateListeners} will be notified.
+     * 
+     * @see #doInitialize()
      */
     public void reset() {
-        currentSolution = null;
         initialize();
         notifySolverReset();
     }
@@ -134,13 +134,11 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
      * This interim solution may not be the best solution ever found and can
      * even be <code>null</code> if {@link #step()} has never been called.
      */
-    public GenericSolutionType getCurrentSolution() {
-        return currentSolution;
-    }
+    public abstract GenericSolutionType getCurrentSolution();
 
     /**
      * Initializes this solver. Every call to this method must reset the solver
-     * in its initial state.
+     * in its initial state and discard the current solution.
      */
     protected abstract void doInitialize();
 
