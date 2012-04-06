@@ -1,5 +1,8 @@
 package de.mh4j.examples;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import de.mh4j.solver.Solution;
 
 /**
@@ -66,4 +69,29 @@ public class Sorting implements Solution {
         return numbers;
     }
 
+    /**
+     * Creates a new Sorting instance with a random non-repeating numbers array.
+     * 
+     * @param numberOfEntries
+     *            Determines how many different numbers will be used in this
+     *            sorting (i.e. the size of the underlying array)
+     */
+    public static Sorting createRandomSorting(int numberOfEntries) {
+        ArrayList<Integer> remainingNumbers = new ArrayList<>(numberOfEntries);
+        for (int i = 0; i < numberOfEntries; i++) {
+            remainingNumbers.add(new Integer(i));
+        }
+
+        Random random = new Random();
+        int[] numbers = new int[numberOfEntries];
+        int currentIndex = 0;
+        do {
+            int randomIndex = random.nextInt(remainingNumbers.size());
+            int randomNumber = remainingNumbers.remove(randomIndex);
+            numbers[currentIndex] = randomNumber;
+            currentIndex++;
+        } while (remainingNumbers.isEmpty() == false);
+
+        return new Sorting(numbers);
+    }
 }
