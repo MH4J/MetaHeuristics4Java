@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="All Examples" verbose="1" >
+    <test name="SortingTest" >
+        <classes>
+            <class name="de.mh4j.examples.SortingTest" />
+        </classes>
+    </test>
+</suite>
