@@ -52,6 +52,10 @@ public abstract class AbstractSolver<GenericSolutionType> implements Runnable {
         stateListeners.add(listener);
     }
 
+    public void removeStateListener(SolverStateListener listener) {
+        stateListeners.remove(listener);
+    }
+
     /**
      * Calls {@link #step()} until {@link #hasFinished()} returns
      * <code>true</code>.

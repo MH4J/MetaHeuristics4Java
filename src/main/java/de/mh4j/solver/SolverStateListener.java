@@ -2,10 +2,10 @@ package de.mh4j.solver;
 
 public interface SolverStateListener {
 
-    public void solverHasBeenRestarted();
+    void solverHasBeenRestarted();
 
-    public void solverStateHasChanged();
+    void solverStateHasChanged();
 
-    public void solverHasFinished();
+    void solverHasFinished();
 
 }
