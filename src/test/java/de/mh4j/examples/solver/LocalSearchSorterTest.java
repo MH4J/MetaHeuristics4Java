@@ -11,7 +11,7 @@ public class LocalSearchSorterTest {
 
         /*
          * if the solver could create any solution without throwing an exception
-         * this test succeeded. (Sorting handles its validity by itself)
+         * this test succeeded. (Sorting class handles its validity by itself)
          */
     }
 

@@ -12,7 +12,7 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
 
     @Override
     protected Sorting createRandomNeighbor() {
-        // TODO Auto-generated method stub
+        Sorting neighbor = new Sorting(currentSolution);
         return null;
     }
 
