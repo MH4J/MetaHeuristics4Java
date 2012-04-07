@@ -6,4 +6,9 @@
             <class name="de.mh4j.examples.SortingTest" />
         </classes>
     </test>
+    <test name="SimulatedAnnealing Example" >
+        <classes>
+            <class name="de.mh4j.examples.solver.LocalSearchSorterTest" />
+        </classes>
+    </test>
 </suite>

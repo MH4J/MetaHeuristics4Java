@@ -1,8 +1,20 @@
 package de.mh4j.examples.solver;
 
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import de.mh4j.examples.Sorting;
+
 public class LocalSearchSorterTest {
+
+    @BeforeClass
+    public static void setup() {
+        Logger log = (Logger) LoggerFactory.getLogger(LocalSearchSorter.class);
+        log.setLevel(Level.WARN);
+    }
 
     @Test
     public void testCreateInitialSolution() {
@@ -15,4 +27,16 @@ public class LocalSearchSorterTest {
          */
     }
 
+    @Test
+    public void testCreateRandomNeighbor() {
+        LocalSearchSorter sorter = new LocalSearchSorter();
+        // invoke step to initialize the solver
+        sorter.step();
+
+        Sorting initialSorting = sorter.getCurrentSolution();
+        Sorting neighbor = sorter.createRandomNeighbor();
+
+        assert initialSorting.equals(neighbor) == false;
+        assert Math.abs(initialSorting.getCosts() - neighbor.getCosts()) <= 2 : "Created neighbor can not have a costs difference of more than 2";
+    }
 }
