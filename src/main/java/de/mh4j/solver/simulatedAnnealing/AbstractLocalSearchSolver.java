@@ -64,6 +64,7 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
     protected void doInitialize() {
         situationHasNotImproved = 0;
         currentSolution = createInitialSolution();
+        log.debug("Initial solution with costs {} created: {}", currentSolution.getCosts(), currentSolution);
     }
 
     @Override
