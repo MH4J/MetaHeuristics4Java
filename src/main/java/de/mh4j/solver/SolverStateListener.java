@@ -1,11 +1,11 @@
 package de.mh4j.solver;
 
-public interface SolverStateListener {
+public interface SolverStateListener<GenericSolutionType> {
 
-    void solverHasBeenRestarted();
+    void solverHasBeenRestarted(Solver<GenericSolutionType> solver);
 
-    void solverHasStepped();
+    void solverHasStepped(Solver<GenericSolutionType> solver);
 
-    void solverHasFinished();
+    void solverHasFinished(Solver<GenericSolutionType> solver);
 
 }
