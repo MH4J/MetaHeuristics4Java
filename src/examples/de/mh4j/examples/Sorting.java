@@ -74,10 +74,12 @@ public class Sorting implements Solution {
     private void calculateCosts() {
         costs = 0;
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] != i) {
-                costs++;
-            }
+            costs += calculateCostsAtIndex(i);
         }
+    }
+
+    private int calculateCostsAtIndex(int index) {
+        return Math.abs(index - numbers[index]);
     }
 
     @Override
@@ -92,6 +94,10 @@ public class Sorting implements Solution {
 
     public int[] getNumbers() {
         return numbers;
+    }
+
+    public int getAmountOfNumbers() {
+        return numbers.length;
     }
 
     @Override
@@ -129,5 +135,30 @@ public class Sorting implements Solution {
         } while (remainingNumbers.isEmpty() == false);
 
         return new Sorting(numbers);
+    }
+
+    public void swapIndices(int i, int j) {
+        // subtract old costs for the swapped indices
+        costs -= calculateCostsAtIndex(i);
+        costs -= calculateCostsAtIndex(j);
+
+        // do the actual swap
+        int tmp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = tmp;
+
+        // add new costs for the swapped indices
+        costs += calculateCostsAtIndex(i);
+        costs += calculateCostsAtIndex(j);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < numbers.length; i++) {
+            builder.append(numbers[i]);
+            builder.append(", ");
+        }
+        return builder.substring(0, builder.length() - 2);
     }
 }
