@@ -1,7 +1,10 @@
 package de.mh4j.examples;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotSame;
 import static org.testng.AssertJUnit.fail;
+
+import java.util.Arrays;
 
 import org.testng.annotations.Test;
 
@@ -16,19 +19,42 @@ public class SortingTest {
 
         Sorting sorting = new Sorting(testdata);
 
-        assertEquals(testdata, sorting.getNumbers());
+        assertEquals(testdata, sorting.numbers);
+    }
+
+    @Test
+    public void testCreateWithNumbers() {
+        Sorting sorting = new Sorting(0, 1, 3, 5, 6, 4, 2);
+
+        assert Arrays.equals(new int[] { 0, 1, 3, 5, 6, 4, 2 }, sorting.numbers);
+    }
+
+    @Test
+    public void testCreateWithEmptyArray() {
+        try {
+            new Sorting(new int[] {});
+            fail("Should have thrown an IllegalArgumentException");
+        } catch (IllegalArgumentException exception) {
+            assertEquals("Input array can not be empty", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void testCreateWithToFewNumbers() {
+        try {
+            new Sorting(1, 98, 99);
+            fail("Should have thrown an IllegalArgumentException");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(
+                    "Input array does not contain enough numbers (highest number is 99 but there were 3 entries in zero based array)",
+                    exception.getMessage());
+        }
     }
 
     @Test
     public void testCreateWithDuplicateNumbersArray() {
-        int[] testdata = new int[100];
-        testdata[0] = 1;
-        testdata[1] = 2;
-        testdata[2] = 2;
-        testdata[3] = 3;
-
         try {
-            new Sorting(testdata);
+            new Sorting(1, 2, 2, 3);
             fail("Should have thrown an IllegalArgumentException");
         } catch (IllegalArgumentException exception) {
             assertEquals("Input array contains at least one duplicate number at index 2", exception.getMessage());
@@ -88,5 +114,33 @@ public class SortingTest {
         Sorting goodSorting = new Sorting(goodSortingArray);
 
         assert goodSorting.isBetterThan(badSorting) : "Good sorting should be better than bad sorting";
+    }
+
+    @Test
+    public void testGetRandomSorting() {
+        int amountOfNumbers = 100;
+        Sorting sorting = Sorting.createRandomSorting(amountOfNumbers);
+
+        assert sorting.getNumbers().length == amountOfNumbers : "Randomly created sorting should have the request amount of numbers in it";
+    }
+
+    @Test
+    public void testEquals() {
+        Sorting sorting = new Sorting(0, 1, 2, 3, 4);
+        Sorting equalSorting = new Sorting(0, 1, 2, 3, 4);
+        Sorting otherSorting = new Sorting(0, 4, 2, 1, 3);
+
+        assert sorting.equals(equalSorting) == true;
+        assert equalSorting.equals(sorting) == true;
+        assert sorting.equals(otherSorting) == false;
+    }
+
+    @Test
+    public void testCopyConstructor() {
+        Sorting sorting = Sorting.createRandomSorting(100);
+        Sorting copy = new Sorting(sorting);
+
+        assertEquals(copy, sorting);
+        assertNotSame(copy, sorting);
     }
 }

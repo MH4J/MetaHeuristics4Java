@@ -1,6 +1,7 @@
 package de.mh4j.examples;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import de.mh4j.solver.Solution;
@@ -20,13 +21,37 @@ import de.mh4j.solver.Solution;
  */
 public class Sorting implements Solution {
 
-    private final int[] numbers;
-    private int costs;
+    protected final int[] numbers;
+    protected int costs;
 
-    public Sorting(int[] numbers) {
+    public Sorting(int... numbers) {
         this.numbers = numbers;
+        checkSize();
         checkForDuplicates();
         calculateCosts();
+    }
+
+    public Sorting(Sorting otherSorting) {
+        this.numbers = Arrays.copyOf(otherSorting.numbers, otherSorting.numbers.length);
+        this.costs = otherSorting.costs;
+    }
+
+    private void checkSize() {
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException("Input array can not be empty");
+        }
+
+        int highestNumber = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > highestNumber) {
+                highestNumber = numbers[i];
+            }
+        }
+
+        if (numbers.length != highestNumber + 1) {
+            throw new IllegalArgumentException("Input array does not contain enough numbers (highest number is "
+                    + highestNumber + " but there were " + numbers.length + " entries in zero based array)");
+        }
     }
 
     private void checkForDuplicates() throws IllegalArgumentException {
@@ -69,21 +94,32 @@ public class Sorting implements Solution {
         return numbers;
     }
 
+    @Override
+    public boolean equals(Object otherObject) {
+        if (otherObject instanceof Sorting) {
+            Sorting otherSorting = (Sorting) otherObject;
+            return Arrays.equals(this.numbers, otherSorting.numbers);
+        }
+        else {
+            return false;
+        }
+    }
+
     /**
      * Creates a new Sorting instance with a random non-repeating numbers array.
      * 
-     * @param numberOfEntries
+     * @param amountOfNumbers
      *            Determines how many different numbers will be used in this
      *            sorting (i.e. the size of the underlying array)
      */
-    public static Sorting createRandomSorting(int numberOfEntries) {
-        ArrayList<Integer> remainingNumbers = new ArrayList<>(numberOfEntries);
-        for (int i = 0; i < numberOfEntries; i++) {
+    public static Sorting createRandomSorting(int amountOfNumbers) {
+        ArrayList<Integer> remainingNumbers = new ArrayList<>(amountOfNumbers);
+        for (int i = 0; i < amountOfNumbers; i++) {
             remainingNumbers.add(new Integer(i));
         }
 
         Random random = new Random();
-        int[] numbers = new int[numberOfEntries];
+        int[] numbers = new int[amountOfNumbers];
         int currentIndex = 0;
         do {
             int randomIndex = random.nextInt(remainingNumbers.size());
