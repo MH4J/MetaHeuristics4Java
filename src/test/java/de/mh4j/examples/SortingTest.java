@@ -82,7 +82,7 @@ public class SortingTest {
 
         Sorting sorting = new Sorting(testdata);
 
-        assert sorting.getCosts() == testdata.length : "Sorting costs for the worst order should be equal to the number of elements in the array";
+        assert sorting.getCosts() == 5000 : "Sorting costs for the worst order should be 5000";
     }
 
     @Test
@@ -98,7 +98,7 @@ public class SortingTest {
 
         Sorting sorting = new Sorting(testdata);
 
-        assert sorting.getCosts() == 3 : "Sorting costs for this order should be 3";
+        assertEquals(40, sorting.getCosts());
     }
 
     @Test
@@ -142,5 +142,42 @@ public class SortingTest {
 
         assertEquals(copy, sorting);
         assertNotSame(copy, sorting);
+    }
+
+    @Test
+    public void testgetAmountOfNumbers() {
+        Sorting sorting = new Sorting(0, 1, 2, 3);
+        assert sorting.getAmountOfNumbers() == 4;
+
+        sorting = new Sorting(0, 1, 2, 3, 4, 5, 6);
+        assert sorting.getAmountOfNumbers() == 7;
+
+        sorting = new Sorting(0);
+        assert sorting.getAmountOfNumbers() == 1;
+    }
+
+    @Test
+    public void testSwapIndices() {
+        Sorting sorting = new Sorting(0, 1, 2, 3, 4, 5);
+
+        assertEquals(0, sorting.getCosts());
+
+        sorting.swapIndices(2, 3);
+        assert Arrays.equals(new int[] { 0, 1, 3, 2, 4, 5 }, sorting.numbers);
+        assertEquals(2, sorting.getCosts());
+    }
+
+    @Test
+    public void testToString() {
+        Sorting sorting;
+
+        sorting = new Sorting(0, 1, 3, 2);
+        assertEquals("0, 1, 3, 2", sorting.toString());
+
+        sorting = new Sorting(0);
+        assertEquals("0", sorting.toString());
+
+        sorting = new Sorting(0, 1, 3, 2, 4, 5, 6, 8, 7);
+        assertEquals("0, 1, 3, 2, 4, 5, 6, 8, 7", sorting.toString());
     }
 }
