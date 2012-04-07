@@ -18,7 +18,7 @@ public class LocalSearchSorterTest {
 
     @Test
     public void testCreateInitialSolution() {
-        LocalSearchSorter sorter = new LocalSearchSorter();
+        LocalSearchSorter sorter = new LocalSearchSorter(10);
         sorter.createInitialSolution();
 
         /*
@@ -29,7 +29,7 @@ public class LocalSearchSorterTest {
 
     @Test
     public void testCreateRandomNeighbor() {
-        LocalSearchSorter sorter = new LocalSearchSorter();
+        LocalSearchSorter sorter = new LocalSearchSorter(10);
         // invoke step to initialize the solver
         sorter.step();
 
@@ -37,6 +37,5 @@ public class LocalSearchSorterTest {
         Sorting neighbor = sorter.createRandomNeighbor();
 
         assert initialSorting.equals(neighbor) == false;
-        assert Math.abs(initialSorting.getCosts() - neighbor.getCosts()) <= 2 : "Created neighbor can not have a costs difference of more than 2";
     }
 }
