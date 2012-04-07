@@ -7,13 +7,14 @@ import ch.qos.logback.classic.Logger;
 import de.mh4j.examples.ExampleSolverStateListener;
 import de.mh4j.examples.Sorting;
 import de.mh4j.solver.Solver;
-import de.mh4j.solver.simulatedAnnealing.AbstractLocalSearchSolver;
+import de.mh4j.solver.simulatedAnnealing.AbstractSimulatedAnnealingSolver;
 
-public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
+public class SimulatedAnnealingSorter extends AbstractSimulatedAnnealingSolver<Sorting> {
 
     private final int amountOfNumbers;
 
-    public LocalSearchSorter(int amountOfNumbers) {
+    public SimulatedAnnealingSorter(int amountOfNumbers) {
+        super(new ExampleCoolingScheme());
         this.amountOfNumbers = amountOfNumbers;
     }
 
@@ -46,10 +47,10 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Logger log = (Logger) LoggerFactory.getLogger(LocalSearchSorter.class);
+        Logger log = (Logger) LoggerFactory.getLogger(SimulatedAnnealingSorter.class);
         log.setLevel(Level.WARN);
 
-        Solver<Sorting> solver = new LocalSearchSorter(100);
+        Solver<Sorting> solver = new SimulatedAnnealingSorter(10);
         solver.addStateListener(new ExampleSolverStateListener<Sorting>());
 
         Thread solverThread = new Thread(solver);

@@ -36,7 +36,7 @@ public class Sorting implements Solution {
         this.costs = otherSorting.costs;
     }
 
-    private void checkSize() {
+    private void checkSize() throws IllegalArgumentException {
         if (numbers.length == 0) {
             throw new IllegalArgumentException("Input array can not be empty");
         }
