@@ -7,6 +7,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.mh4j.concurrency.Interruptible;
 import de.mh4j.solver.termination.TerminationCondition;
 
 /**
@@ -18,7 +19,7 @@ import de.mh4j.solver.termination.TerminationCondition;
  * @param <GenericSolutionType>
  *            the actual Type of the solution class.
  */
-public abstract class AbstractSolver<GenericSolutionType> implements Solver<GenericSolutionType> {
+public abstract class AbstractSolver<GenericSolutionType> implements Solver<GenericSolutionType>, Interruptible {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final Random randomizer;
@@ -28,6 +29,7 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     private final List<TerminationCondition> terminationConditions = new ArrayList<>(1);
     private int numberOfSteps = 0;
     private boolean isInitialized = false;
+    private boolean isInterrupted = false;
 
     /**
      * Creates a new solver with the current time as seed for the according
@@ -81,6 +83,7 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
 
     private void initialize() {
         isInitialized = true;
+        isInterrupted = false;
         numberOfSteps = 0;
         doInitialize();
 
@@ -121,6 +124,11 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
         terminationConditions.add(newTerminationCodnition);
     }
 
+    @Override
+    public void interrupt() {
+        this.isInterrupted = true;
+    }
+
     /**
      * Checks if any {@link TerminationCondition} has been reached.
      * 
@@ -131,6 +139,11 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
      */
     @Override
     public boolean hasFinished() {
+        if (isInterrupted) {
+            log.warn("Solver has been interrupted");
+            return true;
+        }
+
         if (terminationConditions.isEmpty()) {
             return false;
         }
