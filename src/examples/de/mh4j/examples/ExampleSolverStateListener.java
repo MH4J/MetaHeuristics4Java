@@ -1,8 +1,8 @@
 package de.mh4j.examples;
 
-import de.mh4j.examples.solver.SolverStateAdapter;
 import de.mh4j.solver.Solution;
 import de.mh4j.solver.Solver;
+import de.mh4j.solver.SolverStateAdapter;
 
 public class ExampleSolverStateListener<GenericSolutionType extends Solution> extends
         SolverStateAdapter<GenericSolutionType> {
