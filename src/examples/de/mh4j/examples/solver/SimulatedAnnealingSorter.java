@@ -41,8 +41,7 @@ public class SimulatedAnnealingSorter extends AbstractSimulatedAnnealingSolver<S
             return true;
         }
         else {
-            // finish if we have taken 100000 steps
-            return getNumberOfSteps() >= 100000;
+            return situationHasNotImproved >= 5000;
         }
     }
 
