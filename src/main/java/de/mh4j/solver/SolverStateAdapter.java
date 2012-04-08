@@ -1,7 +1,5 @@
-package de.mh4j.examples.solver;
+package de.mh4j.solver;
 
-import de.mh4j.solver.Solver;
-import de.mh4j.solver.SolverStateListener;
 
 public class SolverStateAdapter<GenericSolutionType> implements SolverStateListener<GenericSolutionType> {
 

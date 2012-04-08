@@ -1,14 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="All Examples" verbose="1" >
-    <test name="SortingTest" >
+<suite name="Main test suit" verbose="1" >
+    <test name="Implementation examples" >
         <classes>
             <class name="de.mh4j.examples.SortingTest" />
         </classes>
     </test>
-    <test name="SimulatedAnnealing Example" >
+    
+    <test name="SimulatedAnnealing" >
         <classes>
             <class name="de.mh4j.examples.solver.LocalSearchSorterTest" />
-        </classes>
-    </test>
+        </classes>    
+    </test>    
+>>>>>>> develop
 </suite>
