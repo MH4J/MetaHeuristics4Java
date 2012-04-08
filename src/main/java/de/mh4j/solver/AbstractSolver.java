@@ -7,6 +7,8 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.mh4j.solver.termination.TerminationCondition;
+
 /**
  * A Solver is the representation of an algorithm that can find or approximate
  * solutions to a given optimization problem.
@@ -22,8 +24,8 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     protected final Random randomizer;
     protected long seed;
 
-    private final List<SolverStateListener<GenericSolutionType>> stateListeners = new ArrayList<SolverStateListener<GenericSolutionType>>(
-            2);
+    private final List<SolverStateListener<GenericSolutionType>> stateListeners = new ArrayList<>(2);
+    private final List<TerminationCondition> terminationConditions = new ArrayList<>(1);
     private int numberOfSteps = 0;
     private boolean isInitialized = false;
 
@@ -81,6 +83,10 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
         isInitialized = true;
         numberOfSteps = 0;
         doInitialize();
+
+        if (terminationConditions.isEmpty()) {
+            log.warn("No termination condition has been defined. Solver will not terminate by itself!");
+        }
     }
 
     private void notifyStepped() {
@@ -105,6 +111,36 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
         for (SolverStateListener<GenericSolutionType> listener : stateListeners) {
             listener.solverHasBeenRestarted(this);
         }
+    }
+
+    /**
+     * Adds a new termination condition that will be checked each time that
+     * {@link #hasFinished()} is called.
+     */
+    public void addTerminationCondition(TerminationCondition newTerminationCodnition) {
+        terminationConditions.add(newTerminationCodnition);
+    }
+
+    /**
+     * Checks if any {@link TerminationCondition} has been reached.
+     * 
+     * @return <code>true</code> If at least one termination condition has been
+     *         reached.<br>
+     *         <code>false</code> If no termination condition has been defined
+     *         or no condition has been reached yet.
+     */
+    @Override
+    public boolean hasFinished() {
+        if (terminationConditions.isEmpty()) {
+            return false;
+        }
+
+        for (TerminationCondition terminationCondition : terminationConditions) {
+            if (terminationCondition.shouldTerminate()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
