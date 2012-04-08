@@ -1,4 +1,4 @@
-package de.mh4j.solver.util;
+package de.mh4j.util;
 
 import java.util.Random;
 
