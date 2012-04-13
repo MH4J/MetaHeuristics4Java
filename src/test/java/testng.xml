@@ -1,6 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Main test suit" verbose="1" >
+    <test name="Basic Solvers" >
+        <classes>
+            <class name="de.mh4j.solver.AbstractSolverTest" />
+        </classes>
+    </test>   
+    
     <test name="Implementation examples" >
         <classes>
             <class name="de.mh4j.examples.SortingTest" />
@@ -12,5 +18,4 @@
             <class name="de.mh4j.examples.solver.LocalSearchSorterTest" />
         </classes>    
     </test>    
->>>>>>> develop
 </suite>

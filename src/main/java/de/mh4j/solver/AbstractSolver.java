@@ -117,8 +117,8 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
      * Adds a new termination condition that will be checked each time that
      * {@link #hasFinished()} is called.
      */
-    public void addTerminationCondition(TerminationCondition newTerminationCodnition) {
-        terminationConditions.add(newTerminationCodnition);
+    public void addTerminationCondition(TerminationCondition newTerminationCondition) {
+        terminationConditions.add(newTerminationCondition);
     }
 
     /**
