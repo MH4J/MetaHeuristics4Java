@@ -9,4 +9,12 @@
         <artifactId>MetaHeuristics4Java-ALL</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.mh4j</groupId>
+            <artifactId>MetaHeuristics4Java</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
