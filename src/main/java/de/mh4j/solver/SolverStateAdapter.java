@@ -1,6 +1,5 @@
 package de.mh4j.solver;
 
-
 public class SolverStateAdapter<GenericSolutionType> implements SolverStateListener<GenericSolutionType> {
 
     @Override
