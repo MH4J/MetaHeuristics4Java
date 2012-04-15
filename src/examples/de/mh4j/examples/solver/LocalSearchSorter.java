@@ -17,11 +17,20 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
         this.amountOfNumbers = amountOfNumbers;
     }
 
+    /**
+     * Creates an initial random sorting.
+     */
     @Override
     protected Sorting createInitialSolution() {
         return Sorting.createRandomSorting(amountOfNumbers);
     }
 
+    /**
+     * A random neighbor is created by choosing two random indices in the
+     * sorting array and swapping the numbers at this position.<br>
+     * Hopefully one of the swapped numbers will be nearer to its optimal
+     * position in the sorting and decrease the cost of the whole new sorting.
+     */
     @Override
     protected Sorting createRandomNeighbor() {
         Sorting neighbor = new Sorting(currentSolution);
@@ -33,14 +42,21 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
         return neighbor;
     }
 
+    /**
+     * Checks if we have found the optimal solution with costs zero or if the
+     * number of steps the algorithm has been running has exceeded the maximum
+     * number of steps.<br>
+     * <br>
+     * <b>Note:</b> This termination condition is some arbitrarily chosen
+     * example. Real termination conditions will have to be founded in some
+     * serious considerations.
+     */
     @Override
     public boolean hasFinished() {
         if (currentSolution.getCosts() == 0) {
-            // finish if we found the best sorting
             return true;
         }
         else {
-            // finish if we have taken 100000 steps
             return getNumberOfSteps() >= 100000;
         }
     }
