@@ -11,12 +11,12 @@ public class ExampleCoolingScheme extends AbstractCoolingScheme<Sorting> {
     }
 
     @Override
-    protected int getInitialEquilibrium() {
+    protected int getInitialEpochLength() {
         return 100;
     }
 
     @Override
     public void decreaseTemperature() {
-        temperature = temperature * 0.8;
+        currentTemperature = currentTemperature * 0.8;
     }
 }
