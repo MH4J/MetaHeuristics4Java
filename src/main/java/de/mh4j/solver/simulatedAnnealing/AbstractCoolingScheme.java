@@ -10,11 +10,19 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
 
     /**
      * Determines how long (in number of steps) the algorithm runs until the
-     * current acceptance probability is decreased. Mathematically spoken this
-     * is the length of the markov chain.
+     * current acceptance probability is decreased. A step is one call to
+     * {@link #updateTemperature()}.<br>
+     * <br>
+     * <b>Note:</b> Mathematically spoken this is the length of the markov
+     * chain.
      */
     protected int epochLength;
 
+    /**
+     * The temperature on which this cooling scheme is currently operating. The
+     * First value of this variable will be set to the result of
+     * {@link #getInitialTemperature()}.
+     */
     protected double currentTemperature;
 
     private int nrOfStepsInThisEpoch;
@@ -31,6 +39,7 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
     }
 
     private void initialize() {
+        nrOfStepsInThisEpoch = 0;
         currentTemperature = getInitialTemperature();
         epochLength = getInitialEpochLength();
     }
@@ -53,7 +62,14 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
     protected abstract int getInitialEpochLength();
 
     /**
-     * TODO write javadoc
+     * Checks whether the {@link #epochLength} has been reached. If so the
+     * current temperature will be {@link #decreaseTemperature() decreased }and
+     * a new epoch will be started.<br>
+     * <br>
+     * <b>Note:</b> Each time this method is called a counter is increased. If
+     * the counter reaches the value of {@link #epochLength} then the end of
+     * this epoch has been reached and a new epoch starts by setting the counter
+     * back to zero.
      */
     public void updateTemperature() {
         if (nrOfStepsInThisEpoch >= epochLength) {
@@ -65,12 +81,19 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
     }
 
     /**
-     * TODO write javadoc
+     * Decreases the {@link #currentTemperature} of this cooling scheme.
      */
     protected abstract void decreaseTemperature();
 
     /**
-     * TODO write javadoc
+     * Returns the probability with which a solution should be accepted in
+     * relation to another (often better) solution. The possible range of the
+     * returned probability p will be 0 <= p <= 1.<br>
+     * <br>
+     * <b>Note:</b> this standard implementation calculates the probability with
+     * this formula:<br>
+     * <br>
+     * <code>Math.exp(-Math.log(neighborCosts - currentCosts) / currentTemperature)</code>
      */
     public double getAcceptanceProbability(GenericSolutionType currentSolution, GenericSolutionType neighborSolution) {
         int currentCosts = currentSolution.getCosts();
