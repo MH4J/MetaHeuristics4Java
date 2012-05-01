@@ -5,6 +5,24 @@ import org.slf4j.LoggerFactory;
 
 import de.mh4j.solver.Solution;
 
+/**
+ * 
+ * A cooling scheme is used to define most of the algorithm parameters of a
+ * {@linkplain AbstractSimulatedAnnealingSolver simulated annealing solver}. It
+ * completely handles the temperature, epoch length and can calculate the
+ * acceptance probability with which a worse solution can be accepted in
+ * simulated annealing.
+ * 
+ * @author Friedrich Große
+ * 
+ * @param <GenericSolutionType>
+ *            The actual type of the {@link Solution} which can be used in
+ *            overriding implementations of the calculation of the acceptance
+ *            probability.
+ * 
+ * @see #updateTemperature()
+ * @see #getAcceptanceProbability(Solution, Solution)
+ */
 public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution> {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -69,7 +87,10 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
      * <b>Note:</b> Each time this method is called a counter is increased. If
      * the counter reaches the value of {@link #epochLength} then the end of
      * this epoch has been reached and a new epoch starts by setting the counter
-     * back to zero.
+     * back to zero.<br>
+     * <br>
+     * A log trace message will be produced if the temperature has been
+     * decreased.
      */
     public void updateTemperature() {
         if (nrOfStepsInThisEpoch >= epochLength) {
@@ -91,9 +112,14 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
      * returned probability p will be 0 <= p <= 1.<br>
      * <br>
      * <b>Note:</b> this standard implementation calculates the probability with
-     * this formula:<br>
+     * the following formula:<br>
      * <br>
      * <code>Math.exp(-Math.log(neighborCosts - currentCosts) / currentTemperature)</code>
+     * 
+     * @param currentSolution
+     *            The better solution
+     * @param neighborSolution
+     *            The worse solution
      */
     public double getAcceptanceProbability(GenericSolutionType currentSolution, GenericSolutionType neighborSolution) {
         int currentCosts = currentSolution.getCosts();

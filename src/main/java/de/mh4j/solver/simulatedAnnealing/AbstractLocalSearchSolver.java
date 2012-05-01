@@ -35,7 +35,16 @@ import de.mh4j.solver.Solution;
 public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solution> extends
         AbstractSolver<GenericSolutionType> {
 
+    /**
+     * The number of steps the algorithm could not find a better solution than
+     * the best solution that has ever been found.
+     */
     protected int situationHasNotImproved = 0;
+
+    /**
+     * The {@link Solution} that has been created by the last call to
+     * {@link #doStep()}.
+     */
     protected GenericSolutionType currentSolution;
 
     /**
