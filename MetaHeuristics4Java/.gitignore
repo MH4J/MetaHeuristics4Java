@@ -1,0 +1,11 @@
+## Project files ##
+.classpath
+.project
+.settings/*
+
+## Output folders ##
+target/*
+test-output/*
+
+## Temporary data ##
+*~

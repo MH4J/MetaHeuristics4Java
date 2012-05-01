@@ -1,8 +1,5 @@
-target/*
-.settings/*
-.gitignore~
-.classpath
-.project
+# experimental stuff by Friedrich
 *checkstyle*
-test-output/*
- 
+
+## Temporary data ##
+*~
