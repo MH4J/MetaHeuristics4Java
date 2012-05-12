@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.mh4j.solver.Solution;
 
 /**
@@ -20,6 +23,7 @@ import de.mh4j.solver.Solution;
  * concrete algorithm implementations.
  */
 public class Sorting implements Solution {
+    private static final Logger log = LoggerFactory.getLogger(Sorting.class);
 
     protected final int[] numbers;
     protected int costs;
@@ -105,8 +109,7 @@ public class Sorting implements Solution {
         if (otherObject instanceof Sorting) {
             Sorting otherSorting = (Sorting) otherObject;
             return Arrays.equals(this.numbers, otherSorting.numbers);
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -119,12 +122,26 @@ public class Sorting implements Solution {
      *            sorting (i.e. the size of the underlying array)
      */
     public static Sorting createRandomSorting(int amountOfNumbers) {
+        return Sorting.createRandomSorting(amountOfNumbers, System.nanoTime());
+    }
+
+    /**
+     * Creates a new Sorting instance with a random non-repeating numbers array.
+     * 
+     * @param amountOfNumbers
+     *            Determines how many different numbers will be used in this
+     *            sorting (i.e. the size of the underlying array)
+     * @param seed for the random generator
+     */
+    public static Sorting createRandomSorting(int amountOfNumbers, long seed) {
+        log.debug("create random sorting using seed {}", seed);
+
         ArrayList<Integer> remainingNumbers = new ArrayList<>(amountOfNumbers);
         for (int i = 0; i < amountOfNumbers; i++) {
             remainingNumbers.add(new Integer(i));
         }
 
-        Random random = new Random();
+        Random random = new Random(seed);
         int[] numbers = new int[amountOfNumbers];
         int currentIndex = 0;
         do {

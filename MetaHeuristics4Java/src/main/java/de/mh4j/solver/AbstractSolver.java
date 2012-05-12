@@ -45,6 +45,7 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     public AbstractSolver(long seed) {
         this.randomizer = new Random(seed);
         this.seed = seed;
+        log.debug("seed is {}", seed);
     }
 
     @Override
