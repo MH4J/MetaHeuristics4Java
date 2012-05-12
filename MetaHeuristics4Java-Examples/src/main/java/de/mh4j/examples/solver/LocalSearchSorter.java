@@ -17,6 +17,11 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
         this.amountOfNumbers = amountOfNumbers;
     }
 
+    public LocalSearchSorter(int amountOfNumbers, long seed) {
+        super(seed);
+        this.amountOfNumbers = amountOfNumbers;
+    }
+
     /**
      * Creates an initial random sorting.
      */
@@ -55,8 +60,7 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
     public boolean hasFinished() {
         if (currentSolution.getCosts() == 0) {
             return true;
-        }
-        else {
+        } else {
             return getNumberOfSteps() >= 100000;
         }
     }
