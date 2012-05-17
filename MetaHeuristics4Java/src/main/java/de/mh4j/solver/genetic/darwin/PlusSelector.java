@@ -18,7 +18,7 @@ public class PlusSelector<GenericGenomeType extends Genome> implements Darwin<Ge
     @Override
     public void select(GenePool<GenericGenomeType> genePool, int numberOfSurvivors) {
         Iterator<GenericGenomeType> genomeIt = genePool.iterator();
-        while (genePool.size() > numberOfSurvivors && genomeIt.hasNext()) {
+        while (genePool.getSize() > numberOfSurvivors && genomeIt.hasNext()) {
             genomeIt.next();
             genomeIt.remove();
         }

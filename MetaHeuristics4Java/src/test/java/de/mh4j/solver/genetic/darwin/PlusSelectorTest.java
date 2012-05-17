@@ -25,7 +25,7 @@ public class PlusSelectorTest extends AbstractGenomeTest {
 
         selector.select(population, 5);
 
-        assert population.size() == 5;
+        assert population.getSize() == 5;
 
         for (int i = 1; i <= 5; i++) {
             Genome genome = allGenomes.get(i - 1);

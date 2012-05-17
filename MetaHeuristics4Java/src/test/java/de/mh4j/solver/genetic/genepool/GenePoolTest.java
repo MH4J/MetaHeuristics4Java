@@ -52,14 +52,14 @@ public class GenePoolTest extends AbstractGenomeTest {
     public void testSize_WhenInitialized_ThenSizeAndCurrentGenerationAndFitnessSumIsZero() throws Exception {
         GenePool<Genome> genePool = new GenePool<>();
 
-        assert genePool.size() == 0 : "Fresh genepool should be empty";
+        assert genePool.getSize() == 0 : "Fresh genepool should be empty";
         assert genePool.getCurrentGeneration() == 0 : "Fresh genepool should start at generation 0";
         assert genePool.getFitnessSum() == 0 : "Fresh genepool is empty and should therefore return a fitness sum of 0";
     }
 
     @Test
     public void testAddGenome_WithNewGenome() throws Exception {
-        int currentSize = genePool.size();
+        int currentSize = genePool.getSize();
         int currentGeneration = genePool.getCurrentGeneration();
         long oldFitnessSum = genePool.getFitnessSum();
 
@@ -71,7 +71,7 @@ public class GenePoolTest extends AbstractGenomeTest {
         genePool.addGenome(newGenome);
 
         assert genePool.contains(newGenome) : "Genepool should contain the added genome";
-        assert genePool.size() == currentSize + 1 : "A newly added genome should increase the size of the genepool";
+        assert genePool.getSize() == currentSize + 1 : "A newly added genome should increase the size of the genepool";
         assert genePool.getFitnessSum() == oldFitnessSum + newGenomeFitness : "Adding a new genome to the genepool should increase the fitness sum";
 
         verify(newGenome).setBirthGeneration(currentGeneration);
@@ -190,7 +190,7 @@ public class GenePoolTest extends AbstractGenomeTest {
         GenePool<Genome> copiedGenepool = new GenePool<>(genePool);
 
         assert copiedGenepool != genePool : "Copy of a gene pool should be a new GenePool instance";
-        assert copiedGenepool.size() == genePool.size() : "Copy of gene pool should have the same size as the original gene pool";
+        assert copiedGenepool.getSize() == genePool.getSize() : "Copy of gene pool should have the same size as the original gene pool";
         assert copiedGenepool.getFitnessSum() == genePool.getFitnessSum();
         assert copiedGenepool.getNumberOfDeadChildren() == genePool.getNumberOfDeadChildren();
         assert copiedGenepool.getFittestGenome() == genePool.getFittestGenome();

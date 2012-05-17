@@ -38,7 +38,7 @@ public class RankingSelector<GenericGenomeType extends Genome> extends AbstractM
         double threshold = random.nextDouble();
         double temp = 0;
 
-        sumOfAllRanks = genePool.size() * (genePool.size() + 1) / 2;
+        sumOfAllRanks = genePool.getSize() * (genePool.getSize() + 1) / 2;
         setRanks(genePool);
 
         for (GenericGenomeType genome : genePool) {
@@ -58,8 +58,8 @@ public class RankingSelector<GenericGenomeType extends Genome> extends AbstractM
         Iterator<GenericGenomeType> iterator = genePool.descendingIterator();
         // highest rank for the fittest individual, 1 for the least fittest
         // individual
-        int currentRank = genePool.size();
-        ranks = new HashMap<Genome, Integer>(genePool.size());
+        int currentRank = genePool.getSize();
+        ranks = new HashMap<Genome, Integer>(genePool.getSize());
         while (iterator.hasNext()) {
             GenericGenomeType individual = iterator.next();
             ranks.put(individual, currentRank);

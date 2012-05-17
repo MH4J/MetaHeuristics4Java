@@ -25,26 +25,34 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
     private long fitnessSum;
     private int numberOfChildren = 0;
     private int numberOfDeadChildren;
-    private double successRate = 0d;
+    private double successRate = 0;
 
     private GenericGenomeType fittestGenome;
 
     /**
-     * TODO write javadoc
+     * Creates a new and empty {@link GenePool}.
      */
     public GenePool() {
         genePool = new TreeSet<GenericGenomeType>();
     }
 
     /**
-     * TODO write javadoc
+     * Copies all elements of an existing {@link GenePool}.<br>
+     * <b>Note:</b> the {@link Genome} instances in the original gene pool are
+     * not copied as well. Instead the references to these Genomes are copied
+     * into the new gene pool.<br>
+     * Example: Suppose you have a gene pool <code>a</code>. First you add the
+     * genomes <code>x, y</code> and <code>z</code> to <code>a</code>. Then you
+     * create a new gene pool <code>b</code> by copying <code>a</code>. All
+     * changes you invoke in <code>x, y</code> and <code>z</code> will now be
+     * effective in <em>both</em> gene pools.
      */
-    public GenePool(GenePool<GenericGenomeType> genePoolToCopy) {
-        this.genePool = genePoolToCopy.copyGenePool();
-        this.fitnessSum = genePoolToCopy.fitnessSum;
-        this.numberOfDeadChildren = genePoolToCopy.numberOfDeadChildren;
-        this.fittestGenome = genePoolToCopy.fittestGenome;
-        this.successRate = genePoolToCopy.successRate;
+    public GenePool(GenePool<GenericGenomeType> originalGenePool) {
+        this.genePool = originalGenePool.copyGenePool();
+        this.fitnessSum = originalGenePool.fitnessSum;
+        this.numberOfDeadChildren = originalGenePool.numberOfDeadChildren;
+        this.fittestGenome = originalGenePool.fittestGenome;
+        this.successRate = originalGenePool.successRate;
     }
 
     private TreeSet<GenericGenomeType> copyGenePool() {
@@ -55,7 +63,6 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
         return copiedGenePool;
     }
 
-    // FIXME should this really be package visible?
     void reportDeadGenome(GenericGenomeType genome) {
         fitnessSum -= genome.getFitness();
 
@@ -65,9 +72,10 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
     }
 
     /**
-     * TODO write javadoc
+     * @return the number of genomes that are currently present in this gene
+     *         pool.
      */
-    public int size() {
+    public int getSize() {
         return genePool.size();
     }
 
@@ -148,7 +156,7 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
                 }
             }
 
-            log.trace("Iterated over {} of {} genomes", counter, size());
+            log.trace("Iterated over {} of {} genomes", counter, getSize());
             log.trace("{} duplicates", duplicates);
 
             for (Genome genome : this) {
@@ -163,11 +171,12 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
      * array will have the lowest fitness in the gene pool.
      */
     public Genome[] toArray() {
-        return genePool.toArray(new Genome[size()]);
+        return genePool.toArray(new Genome[getSize()]);
     }
 
     /**
-     * TODO write javadoc
+     * @return the fittest genome that has ever been added to this gene pool or
+     *         <code>null</code> if no genome has been added yet.
      */
     public GenericGenomeType getFittestGenome() {
         return fittestGenome;
@@ -184,6 +193,7 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
      * TODO write javadoc
      */
     public int getNumberOfGenerationsSinceFittestGenomeHasNotChanged() {
+        // FIXME what if fittestGenome is NULL
         return getCurrentGeneration() - fittestGenome.getBirthGeneration();
     }
 

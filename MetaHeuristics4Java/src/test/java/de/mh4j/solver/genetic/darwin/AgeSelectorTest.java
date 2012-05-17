@@ -35,7 +35,7 @@ public class AgeSelectorTest extends AbstractGenomeTest {
         Darwin<Genome> selector = new AgeSelector<>(maxAge);
         selector.select(population, 5);
 
-        assert population.size() == 5 : "New population should have size: 5";
+        assert population.getSize() == 5 : "New population should have size: 5";
 
         for (Genome genome : oldGenomes) {
             assert population.contains(genome) == false;
