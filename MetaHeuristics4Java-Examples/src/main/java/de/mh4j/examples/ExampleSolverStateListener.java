@@ -4,7 +4,7 @@ import de.mh4j.solver.Solution;
 import de.mh4j.solver.Solver;
 import de.mh4j.solver.SolverStateAdapter;
 
-public class ExampleSolverStateListener<GenericSolutionType extends Solution> extends
+public class ExampleSolverStateListener<GenericSolutionType extends Solution<GenericSolutionType>> extends
         SolverStateAdapter<GenericSolutionType> {
 
     GenericSolutionType lastSolution = null;

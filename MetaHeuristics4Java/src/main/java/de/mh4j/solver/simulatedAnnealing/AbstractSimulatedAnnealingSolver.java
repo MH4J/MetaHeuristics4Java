@@ -28,8 +28,8 @@ import de.mh4j.solver.Solution;
  * @see AbstractCoolingScheme
  * @see AbstractLocalSearchSolver
  */
-public abstract class AbstractSimulatedAnnealingSolver<GenericSolutionType extends Solution> extends
-        AbstractLocalSearchSolver<GenericSolutionType> {
+public abstract class AbstractSimulatedAnnealingSolver<GenericSolutionType extends Solution<GenericSolutionType>>
+        extends AbstractLocalSearchSolver<GenericSolutionType> {
 
     /**
      * The cooling scheme on which this simulated annealing instance is

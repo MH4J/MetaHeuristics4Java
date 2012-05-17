@@ -174,4 +174,20 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
     public int getNumberOfGenerationsSinceFittestGenomeHasNotChanged() {
         return getCurrentGeneration() - fittestGenome.getBirthGeneration();
     }
+
+    /**
+     * Returns <code>true</code> if this gene pool contains the specified
+     * element. More formally, returns <code>true</code> if and only if this
+     * gene pool contains a genome <code>g</code> such that
+     * <code>(genome==null ? g==null : genome.equals(g))</code>.
+     * 
+     * @param genome
+     *            object to be checked for containment in this gene pool
+     * 
+     * @return <code>true</code> if the given genome is part of this gene pool,
+     *         <code>false</code> otherwise.
+     */
+    public boolean contains(GenericGenomeType genome) {
+        return genePool.contains(genome);
+    }
 }

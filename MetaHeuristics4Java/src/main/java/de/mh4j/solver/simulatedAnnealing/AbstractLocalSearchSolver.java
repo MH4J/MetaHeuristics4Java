@@ -32,7 +32,7 @@ import de.mh4j.solver.Solution;
  * 
  * @see SimulatedAnnealingSolver
  */
-public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solution> extends
+public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solution<GenericSolutionType>> extends
         AbstractSolver<GenericSolutionType> {
 
     /**

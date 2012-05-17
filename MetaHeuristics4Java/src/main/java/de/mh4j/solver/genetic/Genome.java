@@ -10,24 +10,38 @@ import de.mh4j.util.Comparable;
  * TODO write class description
  * 
  */
-public abstract class Genome implements Solution, Comparable<Genome> {
+public abstract class Genome implements Solution<Genome>, Comparable<Genome> {
     private final Random random;
+
+    public final static int NO_BIRTH_GENERATION_ASSOCIATED = -1;
 
     private int birthGeneration;
 
     /**
-     * TODO write javadoc
+     * TODO write javadoc<br>
+     * TODO enable seed parameter for random
      */
     public Genome() {
         random = new Random();
-        birthGeneration = -1;
+        birthGeneration = NO_BIRTH_GENERATION_ASSOCIATED;
     }
 
     /**
-     * TODO write javadoc
+     * Returns the general Fitness of this genome. The better a genome is the
+     * higher should this value be.
      */
-    public long getFitness() {
-        return -getCosts();
+    public abstract int getFitness();
+
+    /**
+     * The costs of a genome are the opposite of its fitness. The better a
+     * genome is, the higher is its fitness and the lower will the costs be.
+     * 
+     * @return the negated return value of <code>getFitness()</code>
+     * @see #getFitness()
+     */
+    @Override
+    public int getCosts() {
+        return getFitness();
     }
 
     /**
@@ -45,18 +59,30 @@ public abstract class Genome implements Solution, Comparable<Genome> {
     }
 
     /**
-     * TODO write javadoc
+     * Compares this genome to another genome depending on the return values of
+     * {@link #isBetterThan(Genome)} and {@link #equals(Object)}.
+     * 
+     * @param otherGenome
+     *            the other genome which is compared to this genome
+     * @return <code>Comparable.GREATER</code> if this genome is better<br>
+     *         <code>Comparable.LOWER</code> if this genome is worse<br>
+     *         <code>Comparable.EQUAL</code> if both genomes are equal<br>
+     *         or some value randomly chosen between
+     *         <code>Comparable.LOWER</code> and <code>Comparable.GREATER</code>
+     *         if <code>this.isBetterThan(otherGenome)</code> and
+     *         <code>otherGenome.isBetterThan(this)</code> and
+     *         <code>this.equals(otherGenome)</code> all return
+     *         <code>false</code>
+     * @see Comparable
      */
     @Override
     public int compareTo(Genome otherGenome) {
-        double thisFitness = this.getFitness();
-        double otherFitness = otherGenome.getFitness();
 
-        if (thisFitness < otherFitness) {
-            return Comparable.LOWER;
-        }
-        else if (thisFitness > otherFitness) {
+        if (this.isBetterThan(otherGenome)) {
             return Comparable.GREATER;
+        }
+        else if (otherGenome.isBetterThan(this)) {
+            return Comparable.LOWER;
         }
         else if (this.equals(otherGenome)) {
             return Comparable.EQUAL;

@@ -23,7 +23,7 @@ import de.mh4j.solver.Solution;
  * @see #updateTemperature()
  * @see #getAcceptanceProbability(Solution, Solution)
  */
-public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution> {
+public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution<GenericSolutionType>> {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**

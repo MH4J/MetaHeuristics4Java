@@ -19,7 +19,7 @@ import de.mh4j.solver.Solution;
  * an easy example implementation that should help you to understand the
  * concrete algorithm implementations.
  */
-public class Sorting implements Solution {
+public class Sorting implements Solution<Sorting> {
 
     protected final int[] numbers;
     protected int costs;
@@ -88,8 +88,8 @@ public class Sorting implements Solution {
     }
 
     @Override
-    public boolean isBetterThan(Solution otherSolution) {
-        return this.getCosts() < otherSolution.getCosts();
+    public boolean isBetterThan(Sorting otherSorting) {
+        return this.getCosts() < otherSorting.getCosts();
     }
 
     public int[] getNumbers() {

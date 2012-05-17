@@ -1,6 +1,6 @@
 package de.mh4j.solver;
 
-public interface Solution {
+public interface Solution<SolutionImplementationType extends Solution<?>> {
 
     /** TODO add javadoc **/
     int getCosts();
@@ -12,6 +12,6 @@ public interface Solution {
      *         other solution<br>
      *         <code>false</code> if this solution is of worse or equal quality.
      **/
-    boolean isBetterThan(Solution otherSolution);
+    boolean isBetterThan(SolutionImplementationType otherSolution);
 
 }
