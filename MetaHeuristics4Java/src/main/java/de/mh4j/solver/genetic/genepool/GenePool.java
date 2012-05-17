@@ -2,6 +2,7 @@ package de.mh4j.solver.genetic.genepool;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -82,6 +83,15 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
      */
     public long getFitnessSum() {
         return fitnessSum;
+    }
+
+    /**
+     * Adds all elements of the given List to this gene pool.
+     */
+    public void addAllGenomes(List<GenericGenomeType> genomes) {
+        for (GenericGenomeType genome : genomes) {
+            addGenome(genome);
+        }
     }
 
     /**

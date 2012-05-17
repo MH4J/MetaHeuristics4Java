@@ -6,4 +6,13 @@
             <class name="de.mh4j.solver.AbstractSolverTest" />
         </classes>
     </test>
+    
+    <test name="Genetic Solvers" >
+        <packages>
+   	        <package name="de.mh4j.solver.genetic" />
+   	        <package name="de.mh4j.solver.genetic.darwin" />
+   	        <package name="de.mh4j.solver.genetic.genepool" />
+   	        <package name="de.mh4j.solver.genetic.matingselection" />
+   	    </packages>        
+    </test>
 </suite>

@@ -16,7 +16,7 @@ public class AggregateMutator<GenericGenomeType extends Genome> implements Mutat
     /**
      * TODO add javadoc
      */
-    public AggregateMutator(Mutator<GenericGenomeType>... mutators) {
+    public AggregateMutator(Mutator<GenericGenomeType>[] mutators) {
         this.mutators = mutators;
     }
 

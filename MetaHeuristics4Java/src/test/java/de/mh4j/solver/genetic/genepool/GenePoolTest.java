@@ -11,9 +11,10 @@ import java.util.Iterator;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.mh4j.solver.genetic.AbstractGenomeTest;
 import de.mh4j.solver.genetic.Genome;
 
-public class GenePoolTest {
+public class GenePoolTest extends AbstractGenomeTest {
     private GenePool<Genome> genePool;
 
     private Genome genome1;
@@ -45,21 +46,6 @@ public class GenePoolTest {
         genePool.addGenome(genome1);
         genePool.addGenome(genome2);
         genePool.addGenome(genome3);
-    }
-
-    private void makeGenomeMockComparable(Genome genome, Genome otherGenome) {
-        if (genome.getFitness() == otherGenome.getFitness()) {
-            when(genome.compareTo(otherGenome)).thenReturn(Genome.EQUAL);
-            when(genome.isBetterThan(otherGenome)).thenReturn(false);
-        }
-        if (genome.getFitness() > otherGenome.getFitness()) {
-            when(genome.compareTo(otherGenome)).thenReturn(Genome.GREATER);
-            when(genome.isBetterThan(otherGenome)).thenReturn(true);
-        }
-        if (genome.getFitness() < otherGenome.getFitness()) {
-            when(genome.compareTo(otherGenome)).thenReturn(Genome.LOWER);
-            when(genome.isBetterThan(otherGenome)).thenReturn(false);
-        }
     }
 
     @Test
