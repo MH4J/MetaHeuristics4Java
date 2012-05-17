@@ -92,7 +92,7 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
         genePool.add(newGenome);
         fitnessSum += newGenome.getFitness();
 
-        if (fittestGenome == null || fittestGenome.getFitness() < newGenome.getFitness()) {
+        if (fittestGenome == null || newGenome.isBetterThan(fittestGenome)) {
             fittestGenome = newGenome;
         }
         numberOfChildren++;
@@ -148,10 +148,12 @@ public class GenePool<GenericGenomeType extends Genome> implements Iterable<Gene
     }
 
     /**
-     * TODO write javadoc
+     * Returns all genomes of this gene pool in a new array. The elements in the
+     * array will be ordered by their fitness such that the first element in the
+     * array will have the lowest fitness in the gene pool.
      */
     public Genome[] toArray() {
-        return genePool.toArray(new Genome[0]);
+        return genePool.toArray(new Genome[size()]);
     }
 
     /**
