@@ -7,6 +7,12 @@
         </classes>
     </test>
     
+    <test name="Utility Classes" >
+        <packages>
+   	        <package name="de.mh4j.util" />
+   	    </packages>
+    </test>
+    
     <test name="Genetic Solvers" >
         <packages>
    	        <package name="de.mh4j.solver.genetic" />
