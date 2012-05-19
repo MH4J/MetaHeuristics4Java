@@ -13,20 +13,6 @@ public class RouletteMatingSelector<GenericGenomeType extends Genome> extends Ab
     /**
      * TODO write javadoc
      */
-    public RouletteMatingSelector() {
-        super();
-    }
-
-    /**
-     * TODO write javadoc
-     */
-    public RouletteMatingSelector(long seed) {
-        super(seed);
-    }
-
-    /**
-     * TODO write javadoc
-     */
     @Override
     protected Genome selectMate(GenePool<GenericGenomeType> genePool) {
         double threshold = random.nextDouble();

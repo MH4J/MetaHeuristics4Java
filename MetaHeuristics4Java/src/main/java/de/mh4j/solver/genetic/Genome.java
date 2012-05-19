@@ -4,6 +4,7 @@ import java.util.Random;
 
 import de.mh4j.solver.Solution;
 import de.mh4j.util.Comparable;
+import de.mh4j.util.RNGGenerator;
 
 /**
  * 
@@ -11,6 +12,7 @@ import de.mh4j.util.Comparable;
  * 
  */
 public abstract class Genome implements Solution<Genome>, Comparable<Genome> {
+
     private final Random random;
 
     public final static int NO_BIRTH_GENERATION_ASSOCIATED = -1;
@@ -22,7 +24,7 @@ public abstract class Genome implements Solution<Genome>, Comparable<Genome> {
      * TODO enable seed parameter for random
      */
     public Genome() {
-        random = new Random();
+        random = RNGGenerator.createRandomNumberGenerator();
         birthGeneration = NO_BIRTH_GENERATION_ASSOCIATED;
     }
 

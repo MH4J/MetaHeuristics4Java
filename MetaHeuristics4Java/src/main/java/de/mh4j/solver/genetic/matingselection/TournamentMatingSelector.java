@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.mh4j.solver.genetic.Couple;
 import de.mh4j.solver.genetic.Genome;
 import de.mh4j.solver.genetic.genepool.GenePool;
+import de.mh4j.util.RNGGenerator;
 
 /**
  * 
@@ -17,7 +15,6 @@ import de.mh4j.solver.genetic.genepool.GenePool;
  * 
  */
 public class TournamentMatingSelector<GenericGenomeType extends Genome> implements MatingSelector<GenericGenomeType> {
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final Random random;
 
@@ -25,15 +22,7 @@ public class TournamentMatingSelector<GenericGenomeType extends Genome> implemen
      * TODO write javadoc
      */
     public TournamentMatingSelector() {
-        this(System.currentTimeMillis());
-    }
-
-    /**
-     * TODO write javadoc
-     */
-    public TournamentMatingSelector(long seed) {
-        log.debug("Seed is {}", seed);
-        random = new Random(seed);
+        random = RNGGenerator.createRandomNumberGenerator();
     }
 
     /**

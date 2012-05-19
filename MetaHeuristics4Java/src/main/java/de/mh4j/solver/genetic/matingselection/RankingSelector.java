@@ -19,20 +19,6 @@ public class RankingSelector<GenericGenomeType extends Genome> extends AbstractM
     /**
      * TODO write javadoc
      */
-    public RankingSelector() {
-        super();
-    }
-
-    /**
-     * TODO write javadoc
-     */
-    public RankingSelector(long seed) {
-        super(seed);
-    }
-
-    /**
-     * TODO write javadoc
-     */
     @Override
     protected GenericGenomeType selectMate(GenePool<GenericGenomeType> genePool) {
         double threshold = random.nextDouble();

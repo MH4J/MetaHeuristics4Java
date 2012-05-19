@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import de.mh4j.solver.genetic.Couple;
 import de.mh4j.solver.genetic.Genome;
 import de.mh4j.solver.genetic.genepool.GenePool;
+import de.mh4j.util.RNGGenerator;
 
 /**
  * 
@@ -19,21 +20,13 @@ import de.mh4j.solver.genetic.genepool.GenePool;
 public abstract class AbstractMatingSelector<GenericGenomeType extends Genome> implements
         MatingSelector<GenericGenomeType> {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    protected Random random;
+    protected final Random random;
 
     /**
      * TODO write javadoc
      */
     protected AbstractMatingSelector() {
-        this(System.currentTimeMillis());
-    }
-
-    /**
-     * TODO write javadoc
-     */
-    protected AbstractMatingSelector(long seed) {
-        log.debug("Seed is: {}", seed);
-        random = new Random(seed);
+        random = RNGGenerator.createRandomNumberGenerator();
     }
 
     @Override
