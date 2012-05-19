@@ -15,7 +15,6 @@ abstract class MatingSelectorTestCase {
     protected Genome[] genomes;
 
     public void setUp() {
-        System.out.println("CALLED");
         Genome genome1 = mock(Genome.class);
         when(genome1.getFitness()).thenReturn(1000);
         Genome genome2 = mock(Genome.class);
