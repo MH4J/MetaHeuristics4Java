@@ -1,21 +1,10 @@
 package de.mh4j.examples.solver;
 
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import de.mh4j.examples.Sorting;
 
 public class LocalSearchSorterTest {
-
-    @BeforeClass
-    public static void setup() {
-        Logger log = (Logger) LoggerFactory.getLogger(LocalSearchSorter.class);
-        log.setLevel(Level.WARN);
-    }
-
     @Test
     public void testCreateInitialSolution() {
         LocalSearchSorter sorter = new LocalSearchSorter(10);

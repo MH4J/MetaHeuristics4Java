@@ -26,8 +26,8 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
     }
 
     /**
-     * A random neighbor is created by choosing two random indices in the
-     * sorting array and swapping the numbers at this position.<br>
+     * A random neighbor is created by choosing two unequal random indices in
+     * the sorting array and swapping the numbers at this position.<br>
      * Hopefully one of the swapped numbers will be nearer to its optimal
      * position in the sorting and decrease the cost of the whole new sorting.
      */
@@ -36,7 +36,11 @@ public class LocalSearchSorter extends AbstractLocalSearchSolver<Sorting> {
         Sorting neighbor = new Sorting(currentSolution);
 
         int randomIndex1 = randomizer.nextInt(currentSolution.getAmountOfNumbers());
-        int randomIndex2 = randomizer.nextInt(currentSolution.getAmountOfNumbers());
+        int randomIndex2 = randomizer.nextInt(currentSolution.getAmountOfNumbers() - 1);
+
+        if (randomIndex1 <= randomIndex2) {
+            randomIndex2++;
+        }
 
         neighbor.swapIndices(randomIndex1, randomIndex2);
         return neighbor;
