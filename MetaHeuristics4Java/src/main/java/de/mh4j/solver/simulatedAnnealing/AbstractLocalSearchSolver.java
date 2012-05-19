@@ -47,23 +47,6 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
      */
     protected GenericSolutionType currentSolution;
 
-    /**
-     * Creates a new local search solver with the current system time as seed
-     * for the randomizer.
-     */
-    public AbstractLocalSearchSolver() {
-        this(System.currentTimeMillis());
-    }
-
-    /**
-     * Creates a new local search solver with the given seed for its randomizer.
-     * This is useful if you want to recreate results that have been produced
-     * earlier with a specific seed.
-     */
-    public AbstractLocalSearchSolver(long seed) {
-        super(seed);
-    }
-
     @Override
     public GenericSolutionType getCurrentSolution() {
         return currentSolution;

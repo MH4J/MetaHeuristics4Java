@@ -49,28 +49,13 @@ public abstract class AbstractSimulatedAnnealingSolver<GenericSolutionType exten
     protected GenericSolutionType bestSolutionEverFound;
 
     /**
-     * Creates a new simulated annealing solver with the given cooling scheme
-     * and the current system time as seed for the randomizer.
+     * Creates a new simulated annealing solver with the given cooling scheme.
      * 
      * @param coolingScheme
      *            The scheme that is used to control the temperature and
      *            acceptance probability of worse solution candidates.
      */
     public AbstractSimulatedAnnealingSolver(AbstractCoolingScheme<GenericSolutionType> coolingScheme) {
-        this(coolingScheme, System.currentTimeMillis());
-    }
-
-    /**
-     * Creates a new simulated annealing solver with the given cooling scheme
-     * and a specific seed for the randomizer. This is useful if you want to
-     * recreate results that have been produced earlier with a specific seed.
-     * 
-     * @param coolingScheme
-     *            The scheme that is used to control the temperature and
-     *            acceptance probability of worse solution candidates.
-     */
-    public AbstractSimulatedAnnealingSolver(AbstractCoolingScheme<GenericSolutionType> coolingScheme, long seed) {
-        super(seed);
         this.coolingScheme = coolingScheme;
     }
 

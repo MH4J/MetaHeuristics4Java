@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.mh4j.solver.termination.TerminationCondition;
+import de.mh4j.util.RNGGenerator;
 
 /**
  * A Solver is the representation of an algorithm that can find or approximate
@@ -22,7 +23,6 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final Random randomizer;
-    protected long seed;
 
     private final List<SolverStateListener<GenericSolutionType>> stateListeners = new ArrayList<>(2);
     private final List<TerminationCondition> terminationConditions = new ArrayList<>(1);
@@ -30,21 +30,12 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     private boolean isInitialized = false;
 
     /**
-     * Creates a new solver with the current time as seed for the according
-     * {@link Random}.
+     * Creates a new solver. Note that the solver initialization will not yet be
+     * started. Instead this is done after the first call to {@link #step()} or
+     * {@link #run()}.
      */
     public AbstractSolver() {
-        this(System.currentTimeMillis());
-    }
-
-    /**
-     * Creates a new solver with the given seed for the randomizer. This is
-     * useful if you want to recreate results that have been produced earlier
-     * with a specific seed.
-     */
-    public AbstractSolver(long seed) {
-        this.randomizer = new Random(seed);
-        this.seed = seed;
+        randomizer = RNGGenerator.createRandomNumberGenerator();
     }
 
     @Override

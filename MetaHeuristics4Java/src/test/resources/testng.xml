@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Main test suit" verbose="1" >
+<suite name="Main test suit" verbose="0" >
     <test name="Basic Solvers" >
         <classes>
             <class name="de.mh4j.solver.AbstractSolverTest" />
