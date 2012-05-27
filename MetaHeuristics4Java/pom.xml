@@ -4,6 +4,13 @@
     <artifactId>MetaHeuristics4Java</artifactId>
     <packaging>jar</packaging>
 
+    <licenses>
+        <license>
+            <name>GNU Public License v3</name>
+            <url>https://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+
     <parent>
         <groupId>de.mh4j</groupId>
         <artifactId>MetaHeuristics4Java-ALL</artifactId>
