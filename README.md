@@ -41,7 +41,7 @@ To explain the usage of all the different metaheuristics we have created some [e
 Installation
 ---
 
-*TODO*
+Binaries are available in the [Download Section](https://github.com/MH4J/MetaHeuristics4Java/downloads).
 
 Similar projects
 ---
