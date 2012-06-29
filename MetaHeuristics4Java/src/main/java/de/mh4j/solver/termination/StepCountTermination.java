@@ -20,14 +20,14 @@
 
 package de.mh4j.solver.termination;
 
-import de.mh4j.solver.AbstractSolver;
+import de.mh4j.solver.Solver;
 
 public class StepCountTermination<GenericSolutionType> implements TerminationCondition {
 
-    private final AbstractSolver<GenericSolutionType> solver;
+    private final Solver<GenericSolutionType> solver;
     private final int maxStepCount;
 
-    public StepCountTermination(AbstractSolver<GenericSolutionType> solver, int maxStepCount) {
+    public StepCountTermination(Solver<GenericSolutionType> solver, int maxStepCount) {
         this.solver = solver;
         this.maxStepCount = maxStepCount;
     }

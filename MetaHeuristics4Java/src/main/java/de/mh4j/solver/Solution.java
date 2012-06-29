@@ -20,6 +20,14 @@
 
 package de.mh4j.solver;
 
+/**
+ * 
+ * TODO write class description
+ * 
+ * @author Friedrich Große
+ * 
+ * @param <SolutionImplementationType>
+ */
 public interface Solution<SolutionImplementationType extends Solution<?>> {
 
     /** TODO add javadoc **/
