@@ -15,7 +15,7 @@ public class StepCountTerminationTest {
     public void testShouldTerminate() {
         int maxStepCount = 100;
         Solver<Object> solver = mock(Solver.class);
-        TerminationCondition terminator = new StepCountTermination<>(solver, maxStepCount);
+        TerminationCondition terminator = new StepCountTermination(solver, maxStepCount);
 
         when(solver.getNumberOfSteps()).thenReturn(0);
         assert terminator.shouldTerminate() == false;

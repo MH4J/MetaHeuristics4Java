@@ -142,10 +142,6 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
      */
     @Override
     public boolean hasFinished() {
-        if (terminationConditions.isEmpty()) {
-            return false;
-        }
-
         for (TerminationCondition terminationCondition : terminationConditions) {
             if (terminationCondition.shouldTerminate()) {
                 return true;
