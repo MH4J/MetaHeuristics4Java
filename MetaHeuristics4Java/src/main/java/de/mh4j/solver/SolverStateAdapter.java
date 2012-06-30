@@ -20,6 +20,14 @@
 
 package de.mh4j.solver;
 
+/**
+ * 
+ * TODO write class description
+ * 
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
+ * 
+ * @param <GenericSolutionType>
+ */
 public class SolverStateAdapter<GenericSolutionType> implements SolverStateListener<GenericSolutionType> {
 
     @Override

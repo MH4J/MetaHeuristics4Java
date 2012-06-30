@@ -21,16 +21,26 @@
 package de.mh4j.solver;
 
 /**
+ * A Solution represents a valid result of the given optimization problem. Every
+ * Solution must be comparable to other Solutions and should be able to return a
+ * numeric indicator of its costs or quality (fineness).
  * 
- * TODO write class description
- * 
- * @author Friedrich Große
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
  * 
  * @param <SolutionImplementationType>
+ *            The Actual type (class) of this solution. It is used to make this
+ *            solution comparable to other solutions of the
+ *            <code>SolutionImplementationType</code> in the
+ *            {@linkplain #isBetterThan(Solution)} method.
  */
 public interface Solution<SolutionImplementationType extends Solution<?>> {
 
-    /** TODO add javadoc **/
+    /**
+     * Returns a numeric value that represents the costs of this solution. If
+     * the optimization problem is, to maximize the costs of a solution the
+     * return value indicates the absolute quality of the solution (the
+     * fitness).
+     **/
     int getCosts();
 
     /**

@@ -38,6 +38,8 @@ import de.mh4j.util.RNGGenerator;
  * 
  * @param <GenericSolutionType>
  *            the actual Type of the solution class.
+ * 
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
  */
 public abstract class AbstractSolver<GenericSolutionType> implements Solver<GenericSolutionType> {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -144,6 +146,7 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
     public boolean hasFinished() {
         for (TerminationCondition terminationCondition : terminationConditions) {
             if (terminationCondition.shouldTerminate()) {
+                log.info("Optimization finished because the {} has been reached", terminationCondition);
                 return true;
             }
         }

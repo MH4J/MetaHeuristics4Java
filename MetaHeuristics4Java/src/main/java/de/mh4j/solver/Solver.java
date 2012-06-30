@@ -20,6 +20,17 @@
 
 package de.mh4j.solver;
 
+/**
+ * A Solver is the representation of an algorithm that can find or approximate
+ * solutions to a given optimization problem.
+ * 
+ * TODO write more about the possible implementation and utilization of a solver
+ * 
+ * @param <GenericSolutionType>
+ *            the actual Type of the solution class.
+ * 
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
+ */
 public interface Solver<GenericSolutionType> extends Runnable {
 
     /**
@@ -77,9 +88,9 @@ public interface Solver<GenericSolutionType> extends Runnable {
     void addStateListener(SolverStateListener<GenericSolutionType> listener);
 
     /**
-     * TODO write javadoc
-     * 
-     * @param listener
+     * Removes a {@linkplain SolverStateListener} from this solver. The listener
+     * will no longer be informed about important events that may occur on this
+     * solver.
      */
     void removeStateListener(SolverStateListener<GenericSolutionType> listener);
 

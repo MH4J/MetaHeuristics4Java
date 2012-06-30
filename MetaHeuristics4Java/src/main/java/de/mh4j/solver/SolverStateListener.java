@@ -20,12 +20,35 @@
 
 package de.mh4j.solver;
 
+/**
+ * 
+ * TODO write class description
+ * 
+ * @author Friedrich Große
+ * 
+ * @param <GenericSolutionType>
+ */
 public interface SolverStateListener<GenericSolutionType> {
 
+    /**
+     * TODO write javadoc
+     * 
+     * @param solver
+     */
     void solverHasBeenRestarted(Solver<GenericSolutionType> solver);
 
+    /**
+     * TODO write javadoc
+     * 
+     * @param solver
+     */
     void solverHasStepped(Solver<GenericSolutionType> solver);
 
+    /**
+     * TODO write javadoc
+     * 
+     * @param solver
+     */
     void solverHasFinished(Solver<GenericSolutionType> solver);
 
 }

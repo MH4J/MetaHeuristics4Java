@@ -33,7 +33,7 @@ import de.mh4j.solver.Solution;
  * acceptance probability with which a worse solution can be accepted in
  * simulated annealing.
  * 
- * @author Friedrich Große
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
  * 
  * @param <GenericSolutionType>
  *            The actual type of the {@link Solution} which can be used in

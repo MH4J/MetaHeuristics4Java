@@ -41,7 +41,6 @@ public abstract class Genome implements Solution<Genome>, Comparable<Genome> {
 
     /**
      * TODO write javadoc<br>
-     * TODO enable seed parameter for random
      */
     public Genome() {
         random = RNGGenerator.createRandomNumberGenerator();
