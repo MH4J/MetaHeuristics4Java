@@ -35,22 +35,19 @@ import de.mh4j.solver.Solution;
  * candidate. These steps are repeated until the termination condition has been
  * reached.<br>
  * <br>
- * Possible termination conditions may be a fixed time interval or the number of
- * steps that the algorithm could not produce a better solution candidate.<br>
- * <br>
  * The problem with pure local search algorithm is that they can easily run into
  * locally optimal solutions and may never return from there. This local-optima
  * problem may be cured by using restarts (repeated local search with different
  * initial conditions), or more advanced local search algorithms like
- * {@link SimulatedAnnealingSolver Simulated Annealing}.
+ * {@link AbstractSimulatedAnnealingSolver Simulated Annealing}.
  * 
- * @author Friedrich Große
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
  * 
  * @param <GenericSolutionType>
  *            The Type of the class that describes a candidate solution for the
  *            given optimization problem.
  * 
- * @see SimulatedAnnealingSolver
+ * @see AbstractSimulatedAnnealingSolver
  */
 public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solution<GenericSolutionType>> extends
         AbstractSolver<GenericSolutionType> {
@@ -89,11 +86,11 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
         if (neighbor.isBetterThan(currentSolution)) {
             currentSolution = neighbor;
             situationHasNotImproved = 0;
-            log.debug("Found a better neighbor. New costs are {}", neighbor.getCosts());
+            log.trace("Found a better neighbor. New costs are {}", neighbor.getCosts());
         }
         else {
             situationHasNotImproved++;
-            log.debug("Neighbor is worse than the current configuration. Costs stay at {}", currentSolution.getCosts());
+            log.trace("Neighbor is worse than the current configuration. Costs stay at {}", currentSolution.getCosts());
         }
     }
 

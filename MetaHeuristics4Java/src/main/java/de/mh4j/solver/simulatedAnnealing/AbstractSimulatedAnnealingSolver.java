@@ -39,7 +39,7 @@ import de.mh4j.solver.Solution;
  * goes to zero. The allowance for "uphill" moves potentially saves the method
  * from becoming stuck at local optima.
  * 
- * @author Friedrich Große
+ * @author Friedrich Große <friedrich.grosse@gmail.com>
  * 
  * @param <GenericSolutionType>
  *            The Type of the class that describes a candidate solution for the
@@ -110,18 +110,18 @@ public abstract class AbstractSimulatedAnnealingSolver<GenericSolutionType exten
             situationHasNotImproved++;
         }
 
-        log.debug("Found a better solution. New costs are {}", neighborSolution.getCosts());
+        log.trace("Found a better solution. New costs are {}", neighborSolution.getCosts());
     }
 
     private void handleWorseNeighbor(GenericSolutionType neighborSolution) {
         double acceptanceProbability = coolingScheme.getAcceptanceProbability(neighborSolution, currentSolution);
         if (randomizer.nextDouble() < acceptanceProbability) {
             currentSolution = neighborSolution;
-            log.debug("Took worse solution because of the cooling scheme acceptance probability. New costs are {}",
+            log.trace("Took worse solution because of the cooling scheme acceptance probability. New costs are {}",
                     neighborSolution.getCosts());
         }
         else {
-            log.debug("Neighbor is worse than the current solution. Costs stay at {}", currentSolution.getCosts());
+            log.trace("Neighbor is worse than the current solution. Costs stay at {}", currentSolution.getCosts());
         }
         situationHasNotImproved++;
     }

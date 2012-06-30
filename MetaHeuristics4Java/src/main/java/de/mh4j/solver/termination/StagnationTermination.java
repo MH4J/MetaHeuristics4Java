@@ -30,4 +30,9 @@ public class StagnationTermination implements TerminationCondition {
 
         return nrOfStagnatingSteps >= maxNrOfStagnatingSteps;
     }
+
+    @Override
+    public String toString() {
+        return "stagnation termination condition (" + maxNrOfStagnatingSteps + " non-improving steps)";
+    }
 }
