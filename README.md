@@ -1,4 +1,4 @@
-Meta Heuristics 4 Java (MH4J)
+Meta Heuristics 4 Java (MH4J) [![Build Status](https://travis-ci.org/MH4J/MetaHeuristics4Java.png)](https://travis-ci.org/MH4J/MetaHeuristics4Java)
 ===
 
 MH4J is a java framework that enables you to solve optimization problems using metaheuristics.Our aim is to offer a wide range of different algorithms which can be easily integrated into your application.
