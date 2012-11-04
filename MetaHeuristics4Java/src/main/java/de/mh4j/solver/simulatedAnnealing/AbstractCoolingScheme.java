@@ -115,16 +115,22 @@ public abstract class AbstractCoolingScheme<GenericSolutionType extends Solution
     public void updateTemperature() {
         if (nrOfStepsInThisEpoch >= epochLength) {
             nrOfStepsInThisEpoch = 0;
-            decreaseTemperature();
+            currentTemperature = decreaseTemperature(currentTemperature);
             log.trace("Temperature has been decreased to {}", currentTemperature);
         }
         nrOfStepsInThisEpoch++;
     }
 
     /**
-     * Decreases the {@link #currentTemperature} of this cooling scheme.
+     * Decreases the {@link #currentTemperature} of this cooling scheme every
+     * time a new epoch begins.
+     * 
+     * @param currentTemperature
+     *            The current temperature of this cooling scheme
+     * @return the new current temperature
+     * @see #updateTemperature()
      */
-    protected abstract void decreaseTemperature();
+    protected abstract double decreaseTemperature(double currentTemperature);
 
     /**
      * Returns the probability with which a solution should be accepted in

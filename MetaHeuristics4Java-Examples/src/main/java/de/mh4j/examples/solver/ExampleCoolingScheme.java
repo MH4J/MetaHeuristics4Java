@@ -16,7 +16,7 @@ public class ExampleCoolingScheme extends AbstractCoolingScheme<Sorting> {
     }
 
     @Override
-    public void decreaseTemperature() {
-        currentTemperature = currentTemperature * 0.8;
+    public double decreaseTemperature(double currentTemperature) {
+        return currentTemperature * 0.8;
     }
 }
