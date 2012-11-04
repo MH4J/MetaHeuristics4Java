@@ -68,7 +68,7 @@ public class SimulatedAnnealingKnapsackSolver extends AbstractSimulatedAnnealing
     }
 
     private Knapsack createNeighborFromSwap(Knapsack neighbor) {
-        int randomIndex = randomizer.nextInt(availableItems.size());
+        int randomIndex = randomizer.nextInt(neighbor.getNumberOfItems());
         neighbor.removeItem(randomIndex);
         return createNeighborFromAdd(neighbor);
     }
