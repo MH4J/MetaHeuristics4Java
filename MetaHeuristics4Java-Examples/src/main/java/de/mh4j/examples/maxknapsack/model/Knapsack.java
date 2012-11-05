@@ -38,8 +38,7 @@ public class Knapsack implements Solution<Knapsack> {
 
     @Override
     public boolean isBetterThan(Knapsack otherSolution) {
-        // TODO Auto-generated method stub
-        return false;
+        return otherSolution.getCosts() < costs;
     }
 
     public boolean addItem(Item item) {

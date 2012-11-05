@@ -109,4 +109,26 @@ public class KnapsackTest {
 
         assertFalse(knapsack01.equals("String Test"));
     }
+    
+    @Test
+    public void testIsBetterThanOtherKnapsack() {
+    	Knapsack highProfitKnapsack = new Knapsack(10);
+    	Knapsack lowProfitKnapsack = new Knapsack(10);
+    	
+    	highProfitKnapsack.addItem(new Item("expensiveMilk", 3, 1));
+    	highProfitKnapsack.addItem(new Item("expensiveChocolate", 4, 1));
+    	
+    	lowProfitKnapsack.addItem(new Item("cheapMilk", 1, 1));
+    	lowProfitKnapsack.addItem(new Item("cheapChocolate", 2, 1));
+    	lowProfitKnapsack.addItem(new Item("cheapCoke", 3, 1));
+    	
+    	assertTrue(highProfitKnapsack.isBetterThan(lowProfitKnapsack));
+    	assertFalse(lowProfitKnapsack.isBetterThan(highProfitKnapsack));
+    	
+    	lowProfitKnapsack.addItem(new Item("cheapJuice", 1, 1));
+    	
+    	// both have now the same profit
+    	assertFalse(highProfitKnapsack.isBetterThan(lowProfitKnapsack));
+    	assertFalse(lowProfitKnapsack.isBetterThan(highProfitKnapsack));
+    }
 }
