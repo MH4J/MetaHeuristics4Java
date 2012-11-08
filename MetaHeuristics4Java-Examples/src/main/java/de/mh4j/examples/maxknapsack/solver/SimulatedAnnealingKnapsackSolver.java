@@ -6,6 +6,7 @@ import de.mh4j.examples.maxknapsack.model.Item;
 import de.mh4j.examples.maxknapsack.model.Knapsack;
 import de.mh4j.solver.simulatedAnnealing.AbstractSimulatedAnnealingSolver;
 import de.mh4j.solver.termination.StagnationTermination;
+import de.mh4j.solver.termination.StepCountTermination;
 import de.mh4j.util.Util;
 
 public class SimulatedAnnealingKnapsackSolver extends AbstractSimulatedAnnealingSolver<Knapsack> {
@@ -32,7 +33,8 @@ public class SimulatedAnnealingKnapsackSolver extends AbstractSimulatedAnnealing
         this.knapsackCapacity = knapsackCapacity;
         this.availableItems = availableItems;
 
-        addTerminationCondition(new StagnationTermination(this, 100));
+        addTerminationCondition(new StepCountTermination(this, 50));
+        addTerminationCondition(new StagnationTermination(this, 5));
     }
 
     @Override
@@ -43,7 +45,8 @@ public class SimulatedAnnealingKnapsackSolver extends AbstractSimulatedAnnealing
         do {
             Item randomItem = Util.getRandomEntryFrom(availableItems);
             itemHasBeenAdded = knapsack.addItem(randomItem);
-        } while (itemHasBeenAdded);
+            availableItems.remove(randomItem);
+        } while (itemHasBeenAdded && (availableItems.size() > 0));
 
         return knapsack;
     }
@@ -57,19 +60,22 @@ public class SimulatedAnnealingKnapsackSolver extends AbstractSimulatedAnnealing
                 return createNeighborFromAdd(neighbor);
             case SWAP:
                 return createNeighborFromSwap(neighbor);
-
         }
     }
 
     private Knapsack createNeighborFromAdd(Knapsack neighbor) {
-        Item randomItem = Util.getRandomEntryFrom(availableItems);
-        neighbor.addItem(randomItem);
+        if (availableItems.size() > 0) {
+        	Item randomItem = Util.getRandomEntryFrom(availableItems);
+        	neighbor.addItem(randomItem);
+        	availableItems.remove(randomItem);
+        }
         return neighbor;
     }
 
     private Knapsack createNeighborFromSwap(Knapsack neighbor) {
         int randomIndex = randomizer.nextInt(neighbor.getNumberOfItems());
-        neighbor.removeItem(randomIndex);
+        Item removedItem = neighbor.removeItem(randomIndex);
+        availableItems.add(removedItem);
         return createNeighborFromAdd(neighbor);
     }
 

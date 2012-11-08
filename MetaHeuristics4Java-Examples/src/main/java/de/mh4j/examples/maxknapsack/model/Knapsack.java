@@ -84,6 +84,6 @@ public class Knapsack implements Solution<Knapsack> {
 
     @Override
     public String toString() {
-        return (totalCapacity - remainingCapacity) + "/" + totalCapacity + ": " + items;
+        return (totalCapacity - remainingCapacity) + "/" + totalCapacity + ": " + items + " " + costs;
     }
 }

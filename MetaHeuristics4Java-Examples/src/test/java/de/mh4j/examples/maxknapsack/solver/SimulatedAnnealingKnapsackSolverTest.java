@@ -12,9 +12,9 @@ public class SimulatedAnnealingKnapsackSolverTest {
 
     @Test
     public void testSolveSimpleInstance() {
-        int knapsackCapacity = 100;
+        int knapsackCapacity = 59;
         List<Item> items = new ArrayList<>(Arrays.asList(
-                new Item("Foo", 100, 50),
+                new Item("Foo", 100, 40),
                 new Item("Bar", 80, 30),
                 new Item("Muh", 5, 5),
                 new Item("Awe", 30, 10)
