@@ -13,7 +13,7 @@ public class KnapsackTest {
         int capacity = 100;
         Knapsack knapsack = new Knapsack(capacity);
         assertEquals(capacity, knapsack.getCapacity());
-        assertEquals("There shpuld be no items in a new knapsack", 0, knapsack.getNumberOfItems());
+        assertEquals("There should be no items in a new knapsack", 0, knapsack.getNumberOfItems());
         assertEquals("Costs should be zero for a new knapsack", 0, knapsack.getCosts());
         assertEquals(capacity, knapsack.getRemainingCapacity());
     }
