@@ -79,7 +79,19 @@ public class Knapsack implements Solution<Knapsack> {
         }
 
         Knapsack otherKnapsack = (Knapsack) otherObject;
-        return this.items.equals(otherKnapsack.items) && this.totalCapacity == otherKnapsack.totalCapacity;
+    
+        if (otherKnapsack.items.size() != this.items.size()) {
+        	return false;
+        }
+        
+        for (Item item : items) {
+            if (otherKnapsack.items.contains(item) == false) {
+                return false;
+            }
+        }
+        
+
+        return this.totalCapacity == otherKnapsack.totalCapacity;
     }
 
     @Override
