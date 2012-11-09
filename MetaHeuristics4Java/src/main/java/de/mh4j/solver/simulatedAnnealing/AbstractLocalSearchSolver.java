@@ -64,6 +64,8 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
      */
     protected GenericSolutionType currentSolution;
 
+    private GenericSolutionType userDefinedInitialSolution;
+
     @Override
     public GenericSolutionType getCurrentSolution() {
         return currentSolution;
@@ -72,7 +74,12 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
     @Override
     protected void doInitialize() {
         situationHasNotImproved = 0;
-        currentSolution = createInitialSolution();
+        if (userDefinedInitialSolution == null) {
+            currentSolution = createInitialSolution();
+        }
+        else {
+            currentSolution = userDefinedInitialSolution;
+        }
 
         assert currentSolution != null : "The initially created solution can not be null.";
 
@@ -105,4 +112,21 @@ public abstract class AbstractLocalSearchSolver<GenericSolutionType extends Solu
      */
     protected abstract GenericSolutionType createRandomNeighbor();
 
+    /**
+     * Sets the initial solution to the given one. This will override the solution returned by
+     * {@linkplain #createInitialSolution()}.
+     */
+    public void setInitialSolution(GenericSolutionType solution) {
+        this.userDefinedInitialSolution = solution;
+    }
+
+    /**
+     * Sets {@linkplain #currentSolution}to the given new solution.}
+     * 
+     * @param newCurrentSolution
+     */
+    public void setCurrentSolution(GenericSolutionType newCurrentSolution) {
+        currentSolution = newCurrentSolution;
+        log.trace("Setting new solution to: {}", newCurrentSolution);
+    }
 }
