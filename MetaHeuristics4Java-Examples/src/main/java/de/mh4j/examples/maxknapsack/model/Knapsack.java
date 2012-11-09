@@ -20,6 +20,13 @@ public class Knapsack implements Solution<Knapsack> {
         costs = 0;
     }
 
+    public Knapsack(Knapsack original) {
+        this.totalCapacity = original.totalCapacity;
+        this.items = new ArrayList<>(original.items);
+        this.remainingCapacity = original.remainingCapacity;
+        this.costs = original.costs;
+    }
+
     @Override
     public int getCosts() {
         return costs;
@@ -31,8 +38,7 @@ public class Knapsack implements Solution<Knapsack> {
 
     @Override
     public boolean isBetterThan(Knapsack otherSolution) {
-        // TODO Auto-generated method stub
-        return false;
+        return otherSolution.getCosts() < costs;
     }
 
     public boolean addItem(Item item) {
@@ -55,10 +61,29 @@ public class Knapsack implements Solution<Knapsack> {
         return remainingCapacity;
     }
 
-	public Item removeItem(int index) {		
-		Item removedItem = items.remove(index);
-		costs -= removedItem.price;
-		return removedItem;
-	}
+    public Item removeItem(int index) {
+        Item removedItem = items.remove(index);
+        costs -= removedItem.price;
+        remainingCapacity += removedItem.volume;
+        return removedItem;
+    }
 
+    public boolean isFull() {
+        return remainingCapacity == 0;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (otherObject instanceof Knapsack == false) {
+            return false;
+        }
+
+        Knapsack otherKnapsack = (Knapsack) otherObject;
+        return this.items.equals(otherKnapsack.items) && this.totalCapacity == otherKnapsack.totalCapacity;
+    }
+
+    @Override
+    public String toString() {
+        return (totalCapacity - remainingCapacity) + "/" + totalCapacity + ": " + items + " " + costs;
+    }
 }
