@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import org.testng.annotations.Test;
 
+import ch.qos.logback.classic.Level;
 import de.mh4j.solver.termination.TerminationCondition;
 
 public class AbstractSolverTest {
@@ -41,6 +42,23 @@ public class AbstractSolverTest {
         solver.reset();
 
         verify(stateListener).solverHasBeenRestarted(solver);
+    }
+
+    @Test
+    public void testSetLogLevel() {
+        AbstractSolver<Object> solver = new AbstractSolverMock();
+
+        solver.setLogLevel(Level.DEBUG);
+        assert solver.log.getLevel() == Level.DEBUG;
+
+        solver.setLogLevel(Level.INFO);
+        assert solver.log.getLevel() == Level.INFO;
+
+        solver.setLogLevel(Level.WARN);
+        assert solver.log.getLevel() == Level.WARN;
+
+        solver.setLogLevel(Level.ERROR);
+        assert solver.log.getLevel() == Level.ERROR;
     }
 
     private class AbstractSolverMock extends AbstractSolver<Object> {

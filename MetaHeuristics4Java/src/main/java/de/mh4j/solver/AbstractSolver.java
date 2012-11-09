@@ -24,9 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import de.mh4j.solver.termination.TerminationCondition;
 import de.mh4j.util.RNGGenerator;
 
@@ -42,7 +43,7 @@ import de.mh4j.util.RNGGenerator;
  * @author Friedrich Große <friedrich.grosse@gmail.com>
  */
 public abstract class AbstractSolver<GenericSolutionType> implements Solver<GenericSolutionType> {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
 
     protected final Random randomizer;
 
@@ -176,4 +177,8 @@ public abstract class AbstractSolver<GenericSolutionType> implements Solver<Gene
      */
     protected abstract void doStep();
 
+    public void setLogLevel(Level newLogLevel) {
+        log.setLevel(newLogLevel);
+
+    }
 }
