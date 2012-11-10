@@ -22,7 +22,7 @@ public class StagnationTerminationTest {
 
 		assert terminator.shouldTerminate() == false;
 
-		for (int i = 1; i < maxNrOfStagnatingSteps - 1; i++) {
+		for (int i = 0; i < maxNrOfStagnatingSteps - 1; i++) {
 			assert terminator.shouldTerminate() == false;
 		}
 
