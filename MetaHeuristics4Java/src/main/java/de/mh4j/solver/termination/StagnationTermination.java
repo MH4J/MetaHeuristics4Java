@@ -21,7 +21,11 @@ public class StagnationTermination implements TerminationCondition {
 	@Override
 	public boolean shouldTerminate() {
 		Solution<?> currentSolution = solver.getCurrentSolution();
-		if (currentSolution.equals(lastSolution)) {
+
+		if (lastSolution == null) {
+			lastSolution = currentSolution;
+			nrOfStagnatingSteps = 0;
+		} else if (currentSolution.equals(lastSolution)) {
 			nrOfStagnatingSteps++;
 		} else {
 			nrOfStagnatingSteps = 0;
