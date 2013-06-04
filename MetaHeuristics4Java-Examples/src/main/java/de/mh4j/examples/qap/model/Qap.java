@@ -11,13 +11,10 @@ import de.mh4j.solver.Solution;
 
 /** 
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
+ *  The quadratic assignment problem (QAP) is one of fundamental
+ *  combinatorial optimization problems in the branch of optimization
+ *  or operations research in mathematics, from the category of 
+ *  the facilities-location problems.
  * 
  *
  * **/
@@ -47,7 +44,21 @@ public class Qap implements Solution<Qap>{
         this.costs = original.costs;
     }
 	
-	
+	/** 
+	 * This method #calculateCosts calculates this mathematical expression 
+	 * 						__n__    __n__
+	 * 						\        \
+	 * 						 \        \      Fij*Dp(i)p(j)  for minimizing or maximizing the costs
+	 * 						 /        /                      where F are the facilities' flows and D the 
+	 * 					    /____	 /____                   the distances
+	 *                       i=1      j=1
+	 * 
+	 * 
+	 * for example in case of 3 facilities(1,2,3) and 3 locations(A,B,C) this method would calculate: 
+	 * f12*dAB+f13*d¡√+f21*dBA+f23*dB√+ f31*d√¡+f32*d√¬
+	 * 
+	 * 
+	 * */
 	
 	public void calculateCosts (List<String> solution){
 		
