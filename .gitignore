@@ -1,5 +1,9 @@
 # experimental stuff by Friedrich
 *checkstyle*
 
-## Temporary data ##
+# Temporary data #
 *~
+
+# IDE project files and stuff
+.idea
+*.iml
