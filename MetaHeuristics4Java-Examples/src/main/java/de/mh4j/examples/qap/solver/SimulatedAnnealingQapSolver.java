@@ -1,6 +1,5 @@
 package de.mh4j.examples.qap.solver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.mh4j.examples.qap.model.Qap;
@@ -10,14 +9,21 @@ import de.mh4j.solver.termination.StepCountTermination;
 
 public class SimulatedAnnealingQapSolver extends AbstractSimulatedAnnealingSolver<Qap> {
 
-	static List<String> locs = new ArrayList<>();
+    private final List<String> initialSolution;
 
-	public SimulatedAnnealingQapSolver() {
+	public SimulatedAnnealingQapSolver(List<String> initialSolution) {
 		super(new QapCoolingScheme());
+        this.initialSolution = initialSolution;
 
 		addTerminationCondition(new StepCountTermination(this, 50));
 		addTerminationCondition(new StagnationTermination(this, 5));
 	}
+
+    @Override
+    protected Qap createInitialSolution() {
+        return new Qap(initialSolution);
+
+    }
 
 	@Override
 	protected Qap createRandomNeighbor() {
@@ -51,11 +57,4 @@ public class SimulatedAnnealingQapSolver extends AbstractSimulatedAnnealingSolve
 
 		return neighbor;
 	}
-
-	protected Qap createInitialSolution() {
-		Qap qap1 = new Qap(locs);
-		return qap1;
-
-	}
-
 }

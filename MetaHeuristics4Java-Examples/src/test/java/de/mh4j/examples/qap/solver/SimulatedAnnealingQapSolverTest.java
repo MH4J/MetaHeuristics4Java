@@ -121,15 +121,13 @@ public class SimulatedAnnealingQapSolverTest {
 		new Location(locationName3, distances3, distancesNames3);
 		new Location(locationName4, distances4, distancesNames4);
 
-		SimulatedAnnealingQapSolver solver = new SimulatedAnnealingQapSolver();
+        List<String> locations = new ArrayList<>();
+        locations.add("1");
+        locations.add("2");
+        locations.add("4");
+        locations.add("3");
 
-		SimulatedAnnealingQapSolver.locs.add("1");
-		SimulatedAnnealingQapSolver.locs.add("2");
-		SimulatedAnnealingQapSolver.locs.add("4");
-		SimulatedAnnealingQapSolver.locs.add("3");
-
-		solver.createInitialSolution();
-
+		SimulatedAnnealingQapSolver solver = new SimulatedAnnealingQapSolver(locations);
 		solver.setLogLevel(Level.TRACE);
 		solver.run();
 
